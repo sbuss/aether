@@ -9,6 +9,9 @@ gem 'sqlite3', '1.3.3'
 gem 'stringex'
 gem 'jquery-rails', '>= 1.0.12'
 
+group :development do
+  gem 'faker', '0.3.1'
+end
 # Use unicorn as the web server
 # gem 'unicorn'
 
