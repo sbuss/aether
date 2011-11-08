@@ -7,6 +7,7 @@ gem 'rails', '3.0.9'
 
 gem 'sqlite3', '1.3.3'
 gem 'stringex'
+gem 'jquery-rails', '>= 1.0.12'
 
 # Use unicorn as the web server
 # gem 'unicorn'
