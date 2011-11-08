@@ -1,5 +1,6 @@
 class Song < ActiveRecord::Base
   has_many :votes
+  has_many :users, :through => :votes
 
   validates :name,  :presence   => true,
                     :length     => { :maximum => 50 }

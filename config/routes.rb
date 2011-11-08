@@ -1,4 +1,6 @@
 Aether::Application.routes.draw do
+  resources :votes
+
   resources :songs
 
   resources :users
