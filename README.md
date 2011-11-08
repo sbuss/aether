@@ -1,4 +1,5 @@
-= Getting your environment running
+Getting your environment running
+================================
 
 if you haven't created a gemset for development yet, then:
 
