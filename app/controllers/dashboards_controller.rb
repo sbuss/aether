@@ -34,7 +34,7 @@ class DashboardsController < ApplicationController
   # GET /dashboards/1
   # GET /dashboards/1.xml
   def show
-    @dashboard = Dashboard.find(params[:id])
+    @dashboard = Dashboard.find_by_url(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -57,7 +57,7 @@ class DashboardsController < ApplicationController
 
   # GET /dashboards/1/edit
   def edit
-    @dashboard = Dashboard.find(params[:id])
+    @dashboard = Dashboard.find_by_url(params[:id])
   end
 
   # POST /dashboards
@@ -81,7 +81,7 @@ class DashboardsController < ApplicationController
   # PUT /dashboards/1
   # PUT /dashboards/1.xml
   def update
-    @dashboard = Dashboard.find(params[:id])
+    @dashboard = Dashboard.find_by_url(params[:id])
 
     respond_to do |format|
       if @dashboard.update_attributes(params[:dashboard])
@@ -99,7 +99,7 @@ class DashboardsController < ApplicationController
   # DELETE /dashboards/1
   # DELETE /dashboards/1.xml
   def destroy
-    @dashboard = Dashboard.find(params[:id])
+    @dashboard = Dashboard.find_by_url(params[:id])
     @dashboard.destroy
 
     respond_to do |format|

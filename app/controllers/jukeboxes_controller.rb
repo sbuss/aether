@@ -14,7 +14,7 @@ class JukeboxesController < ApplicationController
   # GET /jukeboxes/1
   # GET /jukeboxes/1.xml
   def show
-    @jukebox = Jukebox.find(params[:id])
+    @jukebox = Jukebox.find_by_url(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -37,7 +37,7 @@ class JukeboxesController < ApplicationController
 
   # GET /jukeboxes/1/edit
   def edit
-    @jukebox = Jukebox.find(params[:id])
+    @jukebox = Jukebox.find_by_url(params[:id])
   end
 
   # POST /jukeboxes
@@ -61,7 +61,7 @@ class JukeboxesController < ApplicationController
   # PUT /jukeboxes/1
   # PUT /jukeboxes/1.xml
   def update
-    @jukebox = Jukebox.find(params[:id])
+    @jukebox = Jukebox.find_by_url(params[:id])
 
     respond_to do |format|
       if @jukebox.update_attributes(params[:jukebox])
@@ -79,7 +79,7 @@ class JukeboxesController < ApplicationController
   # DELETE /jukeboxes/1
   # DELETE /jukeboxes/1.xml
   def destroy
-    @jukebox = Jukebox.find(params[:id])
+    @jukebox = Jukebox.find_by_url(params[:id])
     @jukebox.destroy
 
     respond_to do |format|
