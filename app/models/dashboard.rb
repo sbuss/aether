@@ -1,5 +1,4 @@
 class Dashboard < ActiveRecord::Base
-  has_many :jukeboxes
   belongs_to :user
 
   validates :name,  :presence   => true,
