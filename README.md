@@ -23,3 +23,4 @@ Then set up the database
 
     bundle exec rake db:migrate
     bundle exec rake db:test:prepare
+    bundle exec rake db:populate
