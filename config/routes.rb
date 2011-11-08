@@ -1,4 +1,6 @@
 Aether::Application.routes.draw do
+  resources :dashboards
+
   resources :jukeboxes
 
   resources :votes
