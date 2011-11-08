@@ -1,5 +1,9 @@
 Aether::Application.routes.draw do
-  resources :dashboards
+  resources :dashboards do
+    collection do
+      get 'nearby', :as => "nearby_dashboards"
+    end
+  end
 
   resources :jukeboxes
 

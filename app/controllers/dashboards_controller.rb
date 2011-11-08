@@ -1,4 +1,24 @@
 class DashboardsController < ApplicationController
+  def nearby
+    lat = params[:lat].to_f
+    lng = params[:lng].to_f
+    rad = params[:radius].to_f # in feet
+    logger.info "rad is #{rad}"
+    # appx 69 miles per degree latitude
+    lat_err = rad * (1.0/(5280 * 69))
+    logger.info "lat_err is #{lat_err}"
+    lat_min = lat - lat_err
+    lat_max = lat + lat_err
+    # length of longitude will vary by latitude
+    lng_err = lat_err / Math.cos(lat * Math::PI / 180)
+    lng_min = lng - lng_err
+    lng_max = lng + lng_err
+    
+    @dashboards = Dashboard.where("(dashboards.lat BETWEEN ? AND ?) AND (dashboards.lng BETWEEN ? AND ?)", lat_min, lat_max, lng_min, lng_max)
+
+    render :index
+  end
+
   # GET /dashboards
   # GET /dashboards.xml
   def index
