@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @jukebox.name %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%= @jukebox.url %>
+</p>
+
+<p>
+  <b>Dashboard:</b>
+  <%= @jukebox.dashboard_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_jukebox_path(@jukebox) %> |
+<%= link_to 'Back', jukeboxes_path %>
