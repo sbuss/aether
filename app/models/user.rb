@@ -10,4 +10,13 @@ class User < ActiveRecord::Base
   def to_param
     url
   end
+
+  def as_json(options = {})
+    {
+      :id => self.id,
+      :name => self.name,
+      :dashboards => self.dashboards.map { |o| o.id },
+      :votes => self.votes.map { |o| o.id }
+    }
+  end
 end

@@ -9,4 +9,12 @@ class Dashboard < ActiveRecord::Base
   def to_param
     url
   end
+
+  def as_json(options = {})
+    {
+      :id => self.id,
+      :name => self.name,
+      :user => self.user_id,
+    }
+  end
 end

@@ -7,6 +7,7 @@ class SongsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @songs }
+      format.json  { render :json => @songs }
     end
   end
 
@@ -18,6 +19,7 @@ class SongsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @song }
+      format.json  { render :json => @song }
     end
   end
 
@@ -29,6 +31,7 @@ class SongsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @song }
+      format.json  { render :json => @song }
     end
   end
 
@@ -46,9 +49,11 @@ class SongsController < ApplicationController
       if @song.save
         format.html { redirect_to(@song, :notice => 'Song was successfully created.') }
         format.xml  { render :xml => @song, :status => :created, :location => @song }
+        format.json  { render :json => @song, :status => :created, :location => @song }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @song.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @song.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -62,9 +67,11 @@ class SongsController < ApplicationController
       if @song.update_attributes(params[:song])
         format.html { redirect_to(@song, :notice => 'Song was successfully updated.') }
         format.xml  { head :ok }
+        format.json  { head :ok }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @song.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @song.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -78,6 +85,7 @@ class SongsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(songs_url) }
       format.xml  { head :ok }
+      format.json  { head :ok }
     end
   end
 end

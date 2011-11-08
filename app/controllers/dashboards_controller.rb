@@ -27,6 +27,7 @@ class DashboardsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @dashboards }
+      format.json  { render :json => @dashboards }
     end
   end
 
@@ -38,6 +39,7 @@ class DashboardsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @dashboard }
+      format.json  { render :json => @dashboards }
     end
   end
 
@@ -49,6 +51,7 @@ class DashboardsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @dashboard }
+      format.json  { render :json => @dashboards }
     end
   end
 
@@ -66,9 +69,11 @@ class DashboardsController < ApplicationController
       if @dashboard.save
         format.html { redirect_to(@dashboard, :notice => 'Dashboard was successfully created.') }
         format.xml  { render :xml => @dashboard, :status => :created, :location => @dashboard }
+        format.json  { render :json => @dashboard, :status => :created, :location => @dashboard }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @dashboard.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @dashboard.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -82,9 +87,11 @@ class DashboardsController < ApplicationController
       if @dashboard.update_attributes(params[:dashboard])
         format.html { redirect_to(@dashboard, :notice => 'Dashboard was successfully updated.') }
         format.xml  { head :ok }
+        format.json  { head :ok }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @dashboard.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @dashboard.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -98,6 +105,7 @@ class DashboardsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(dashboards_url) }
       format.xml  { head :ok }
+      format.json  { head :ok }
     end
   end
 end

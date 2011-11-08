@@ -11,4 +11,13 @@ class Song < ActiveRecord::Base
   def to_param
     url
   end
+
+  def as_json(options = {})
+    {
+      :id => self.id,
+      :name => self.name,
+      :grooveshark_song_id => self.grooveshark_song_id,
+      :votes => self.votes.map { |o| o.id }
+    }
+  end
 end
