@@ -4,7 +4,9 @@ class Song < ActiveRecord::Base
   belongs_to :jukebox
 
   validates :name,  :presence   => true,
-                    :length     => { :maximum => 50 }
+                    :length     => { :maximum => 500 }
+  validates :artist,  :presence   => true,
+                    :length     => { :maximum => 100 }
   validates :grooveshark_song_id,  :presence   => true
 
   acts_as_url :name
