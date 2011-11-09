@@ -40,41 +40,20 @@
 </div>
 
 <!-- / Jukebox code -->
-
-**<%= @songs %>**
-<div id="song" class="votingSong">
+<% @songs.each_with_index do |song, i| %>
+<div id="song<%= i %>" class="votingSong">
     <div class="album_art"></div>
     <div class="album_info">
-        <h2><h2>  
+        <h2><%= song.name %><h2>  
+            <h2><%= song.votes %><h2>  
     </div>    
     <div class="votes">
         <div class="progBar"><span>0%</span></div>
     </div>
 </div>
+<% end %>
 
 
-
-<div id="song2" class="votingSong">
-    <div class="album_art"></div>
-    <div class="album_info">
-        <h2>Song 2<h2>
-        Artist 2        
-    </div>    
-    <div class="votes">
-        <div class="progBar"><span>0%</span></div>
-    </div>
-</div>
-
-<div id="song3" class="votingSong">
-    <div class="album_art"></div>
-    <div class="album_info">
-        <h2>Song 3<h2>
-        Artist 3        
-    </div>    
-    <div class="votes">
-        <div class="progBar"><span>0%</span></div>
-    </div>
-</div>
 
 
 <h2>Here's some random shit:</h2>
