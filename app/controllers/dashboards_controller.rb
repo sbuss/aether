@@ -19,10 +19,13 @@ class DashboardsController < ApplicationController
     render :index
   end
 
+
+
   # GET /dashboards
   # GET /dashboards.xml
   def index
     @dashboards = Dashboard.all
+    @songs = Song.all
 
     respond_to do |format|
       format.html # index.html.erb

@@ -1,2 +1,10 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
+// Fuck namespacing
+function setSongPercent (songDOM, percent) {
+    var $song = $(songDOM);
+    //Set % text
+    $song.find("div.progBar span").text(percent+"%");
+    
+    //Set length of progressbar
+    $song.find("div.progBar").css("width", (percent+"%"));
+    
+}

@@ -1,0 +1,179 @@
+body{
+    background:#000 url("/images/body_bg.png") repeat left top;
+    color:#fff;
+    position:relative;
+}
+
+h1 {
+  font-weight:normal;
+  text-align:center;  
+  font-size:2.5em;
+}
+
+ul.tasks {
+    position:absolute;
+}
+.b1{color:#93bdeb;}
+.b2{color:#72a5de;}
+.b3{color:#516883;}
+
+/* JukeBox */
+.jb {
+    margin:0 auto;
+    width:820px;
+    height:325px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background:transparent url(/images/jb_bg.png) no-repeat center center;
+    position:relative;    
+}
+
+.jb .content {
+    position:relative;
+    z-index:2;
+    padding:50px;
+    color:#fff;
+}
+
+.jb .now_playing {
+    color:#FFF;
+    float:left;
+}
+.jb .pointer {
+    float:left;
+}
+.jb .pointer.red {
+    background:#af0200;
+}
+.jb .pointer.gray {
+    background:#2e302f;
+}
+
+.jb .song_title {
+    clear:left;
+    font-size:2em;
+}
+.jb .fbimage {
+    border:1px solid #fff;
+    float:left;
+    width:15px;
+    height:15px;
+}
+
+.playing_next {
+    clear:left;
+}
+.playing_next_title {
+    clear:left;
+}
+.album_art{
+    width:201px;
+    height:204px;
+    background:transparent url("/images/ab_art1.png") center center;
+    float:left;
+}
+
+.album_info {
+    float:left;
+}
+
+.jb .likes {
+    position:absolute;
+    right:-75px;
+    width:75px;
+    height:200px;
+}
+
+.jb .likes .fbimage {
+    margin:10px 5px;
+}
+
+.fadeBack {
+    z-index:1;
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    background:#000;
+    opacity:.5;
+}
+
+#timeLeft {
+    color:#fff;
+    text-align:center;
+}
+
+#timeLeft h2 {
+    margin-top:20px;
+    font-size:5em;
+    text-shadow: #000 5px 5px 3px;
+}
+
+
+/* /JukeBox */
+
+#lifeLine {
+    position:absolute;
+    top:400px;
+    bottom:0;
+    left:0;
+    right:0;
+    text-align:center;
+}
+
+#lifeLine .llLine {
+    margin:0 auto;
+    background:transparent url("/images/lifeLine_bg.png") repeat-y center top;
+    width:147px;
+    position:absolute;
+    bottom:0px;
+    top:147px;
+    left:0;
+    right:0;
+}
+
+
+#lifeLine .llTop {
+    margin:0 auto;
+    background:transparent url("/images/lifeLine_top.png") no-repeat center bottom;
+    width:147px;
+    height:147px;
+    
+}
+
+.votingSong {
+    position:relative;
+    clear:left;
+    color:#fff;
+    width:400px;
+}
+
+.votingSong .votes {
+    clear:left;
+}
+
+.progBar {
+    height:50px;
+    width:0;
+    margin-left:20px;
+}
+
+.progBar span{
+    float:right;
+}
+
+#song1 .progBar {
+    background-color:green;
+}
+
+
+#song2 .progBar {
+    background-color:red;
+}
+
+
+#song3 .progBar {
+    background-color:yellow;
+}

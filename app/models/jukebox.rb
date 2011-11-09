@@ -5,7 +5,8 @@ class Jukebox < ActiveRecord::Base
   validates :name,  :presence   => true,
                     :length     => { :maximum => 50 }
   validates :dashboard_id, :presence => true
-
+  acts_as_url :name
+  
   def as_json(options = {})
     {
       :id => self.id,

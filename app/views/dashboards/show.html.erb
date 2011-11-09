@@ -1,3 +1,83 @@
+
+<div id="lifeLine"><div class="llTop"></div><div class="llLine"></div></div>
+
+<ul class="tasks">
+    <li>Record votes</li>
+    <li>Smiley slider</li   >
+   <li> Login with Facebook</li> 
+    <li>Drag and drop widgets</li>
+    <li>Mobile site</li>
+    <li>play music</li>
+    <li>QR code to launch site on phone</li>
+</ul>
+
+
+<!-- Move to jukebox code -->
+
+<div id="timeLeft">Time Left to Vote:
+    <h2 id="countdown"></h2>
+</div>
+<div class="jb">
+    <div class="fadeBack"></div>
+    
+    <div class="content">
+        <div class="album_art"></div>
+        <div class="album_info">
+            <div class="now_playing"><div class="pointer red">NOW PLAYING</div> <div class="fbimage"></div><div class="fbimage"></div></div>
+            <div class="song_title">Apple Blossom</div>
+            <div class="playing_next"><div class="pointer gray">PLAYING NEXT</div><div class="fbimage"></div></div>
+            <div class="playing_next_title">Ways to School by Yiruma</div>
+        </div>
+    </div>
+    
+    <div class="likes">
+        <div class="fbimage"></div>
+        <div class="fbimage"></div>
+        <div class="fbimage"></div>
+        <div class="fbimage"></div>
+        <div class="fbimage"></div>
+    </div>
+</div>
+
+<!-- / Jukebox code -->
+
+**<%= @songs %>**
+<div id="song" class="votingSong">
+    <div class="album_art"></div>
+    <div class="album_info">
+        <h2><h2>  
+    </div>    
+    <div class="votes">
+        <div class="progBar"><span>0%</span></div>
+    </div>
+</div>
+
+
+
+<div id="song2" class="votingSong">
+    <div class="album_art"></div>
+    <div class="album_info">
+        <h2>Song 2<h2>
+        Artist 2        
+    </div>    
+    <div class="votes">
+        <div class="progBar"><span>0%</span></div>
+    </div>
+</div>
+
+<div id="song3" class="votingSong">
+    <div class="album_art"></div>
+    <div class="album_info">
+        <h2>Song 3<h2>
+        Artist 3        
+    </div>    
+    <div class="votes">
+        <div class="progBar"><span>0%</span></div>
+    </div>
+</div>
+
+
+<h2>Here's some random shit:</h2>
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -33,3 +113,31 @@
 
 <%= link_to 'Edit', edit_dashboard_path(@dashboard) %> |
 <%= link_to 'Back', dashboards_path %>
+
+
+<script type="text/javascript">
+$(function () {
+    //Countdown timer until song changes
+    var totalTime = 10,
+        endTime = new Date(),
+        $timer = $("#countdown");
+    endTime.setSeconds(endTime.getSeconds() + totalTime);
+        
+        
+    (function countDown() {
+        var now = new Date(),
+            timeLeft = Math.floor((endTime-now)/1000),
+            formatted = timeLeft < 10 ? timeLeft < 0 ? "00": "0"+timeLeft : timeLeft;
+        $timer.text("00:"+formatted);
+            
+        if(endTime - now < 0) {
+            return;
+        } else {
+            setTimeout(countDown, 100)
+        }
+    })()    
+    
+    
+})
+
+</script>
