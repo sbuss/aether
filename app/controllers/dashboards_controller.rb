@@ -25,8 +25,6 @@ class DashboardsController < ApplicationController
   # GET /dashboards.xml
   def index
     @dashboards = Dashboard.all
-    
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @dashboards }
@@ -34,12 +32,15 @@ class DashboardsController < ApplicationController
     end
   end
 
+
   # GET /dashboards/1
   # GET /dashboards/1.xml
   def show
     @dashboard = Dashboard.find_by_url(params[:id])
-    @songs = Song.all
-    
+#    @songs = Song.all
+    @jukebox = Jukebox.where(:dashboard_id => @dashboard)
+    @songs = Song.where(:jukebox_id => @jukebox)
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @dashboard }

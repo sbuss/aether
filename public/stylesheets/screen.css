@@ -22,9 +22,9 @@ ul.tasks {
     margin:0 auto;
     width:820px;
     height:325px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
     background:transparent url(/images/jb_bg.png) no-repeat center center;
     position:relative;    
 }
@@ -36,6 +36,11 @@ ul.tasks {
     color:#fff;
 }
 
+
+.jb .album_info {
+    padding:20px 0 0 15px;
+
+}
 .jb .now_playing {
     color:#FFF;
     float:left;
@@ -51,14 +56,16 @@ ul.tasks {
 }
 
 .jb .song_title {
-    clear:left;
-    font-size:2em;
+    clear: left;
+    font-size: 3em;
+    margin: 40px 0;
 }
 .jb .fbimage {
-    border:1px solid #fff;
+    background:transparent url("/images/fb_profile.png") no-repeat center center;
     float:left;
     width:15px;
     height:15px;
+    margin:5px;
 }
 
 .playing_next {
@@ -66,6 +73,8 @@ ul.tasks {
 }
 .playing_next_title {
     clear:left;
+    font-size:1.5em;
+    opacity:.75;
 }
 .album_art{
     width:201px;

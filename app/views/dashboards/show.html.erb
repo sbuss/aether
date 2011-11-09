@@ -12,49 +12,9 @@
 </ul>
 
 
-<!-- Move to jukebox code -->
-
-<div id="timeLeft">Time Left to Vote:
-    <h2 id="countdown"></h2>
-</div>
-<div class="jb">
-    <div class="fadeBack"></div>
-    
-    <div class="content">
-        <div class="album_art"></div>
-        <div class="album_info">
-            <div class="now_playing"><div class="pointer red">NOW PLAYING</div> <div class="fbimage"></div><div class="fbimage"></div></div>
-            <div class="song_title">Apple Blossom</div>
-            <div class="playing_next"><div class="pointer gray">PLAYING NEXT</div><div class="fbimage"></div></div>
-            <div class="playing_next_title">Ways to School by Yiruma</div>
-        </div>
-    </div>
-    
-    <div class="likes">
-        <div class="fbimage"></div>
-        <div class="fbimage"></div>
-        <div class="fbimage"></div>
-        <div class="fbimage"></div>
-        <div class="fbimage"></div>
-    </div>
-</div>
-
+<%= render @jukebox %>
+<%= render @songs %>
 <!-- / Jukebox code -->
-<% @songs.each_with_index do |song, i| %>
-<div id="song<%= i %>" class="votingSong">
-    <div class="album_art"></div>
-    <div class="album_info">
-        <h2><%= song.name %><h2>  
-            <h2><%= song.votes %><h2>  
-    </div>    
-    <div class="votes">
-        <div class="progBar"><span>0%</span></div>
-    </div>
-</div>
-<% end %>
-
-
-
 
 <h2>Here's some random shit:</h2>
 <p id="notice"><%= notice %></p>
@@ -95,7 +55,46 @@
 
 
 <script type="text/javascript">
+// Fuck namespacing
+function setSongPercent (songDOM, percent) {
+    var $song = $(songDOM);
+    //Set % text
+    $song.find("div.progBar span").text(percent+"%");
+    
+    //Set length of progressbar
+    $song.find("div.progBar").css("width", (percent+"%"));    
+}
+function updatePerc() {
+    //Grab current state of all songs
+    $.get("/songs", 
+        function(data) {
+            var totalVotes = 0;
+        //Grab total votes
+        for(var i=0,l=data.length;i<l;i++) {
+            totalVotes += data[i].votes.length
+        }
+
+        // update Songs 
+        for(var i=0;i<l;i++) {
+            var perc = (data[i].votes.length/totalVotes)*100;
+            setSongPercent($("#song"+data[i].id).eq(0), perc);
+        }
+
+        }, 
+    "json")
+    setTimeout(updatePerc, 1000)
+}
 $(function () {
+    //voting
+    $("div.votingSong").click(function() {
+        $.post("/votes", { "vote[user_id]": 2, "vote[song_id]": $(this).attr("id").replace("song","") });
+        return false;
+    })
+    
+    
+    // Request to update numbers
+    updatePerc()
+    
     //Countdown timer until song changes
     var totalTime = 10,
         endTime = new Date(),

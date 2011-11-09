@@ -1,0 +1,11 @@
+<div id="song<%= song.id %>" class="votingSong">
+    <div class="album_art"></div>
+    <div class="album_info">
+        <h2><%= song.name %><button class="vote">VOTE</button><h2>  
+        <%= song.artist %>
+        <%= song.votes.length %>
+    </div>    
+    <div class="votes">
+        <div class="progBar"><span>0%</span></div>
+    </div>
+</div>

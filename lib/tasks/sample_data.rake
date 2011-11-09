@@ -21,8 +21,20 @@ namespace :db do
     j = Jukebox.create!(:name => "Sample jukebox",
                   :dashboard => d)
 
-    # Create a song
-    s = Song.create(:name => "Ellie Golding - Lights (Bassnectar Remix)",
-              :grooveshark_song_id => 29008173)
+    # Create songs
+    s = Song.create(:artist => "Ellie Golding",
+              :name => "Lights (Bassnectar Remix)",
+              :grooveshark_song_id => 29008173,
+              :jukebox_id => j)
+    
+    s = Song.create(:artist => "Maroon 5",
+              :name => "Moves like Jaggar",
+              :grooveshark_song_id => 31315624,
+              :jukebox_id => j)
+              
+    s = Song.create(:artist => "Lil' Wayne",
+              :name => "How to love",
+              :grooveshark_song_id => 30719004,
+              :jukebox_id => j)
   end
 end

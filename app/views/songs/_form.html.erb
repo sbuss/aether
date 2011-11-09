@@ -16,6 +16,10 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
+    <%= f.label :artist %><br />
+    <%= f.text_field :artist %>
+  </div>
+  <div class="field">
     <%= f.label :url %><br />
     <%= f.text_field :url %>
   </div>
@@ -23,6 +27,11 @@
     <%= f.label :grooveshark_song_id %><br />
     <%= f.text_field :grooveshark_song_id %>
   </div>
+  <div class="field">
+    <%= f.label :jukebox_id %><br />
+    <%= f.text_field :jukebox_id %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
