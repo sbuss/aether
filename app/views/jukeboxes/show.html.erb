@@ -1,5 +1,7 @@
-<p id="notice"><%= notice %></p>
+<%= render @jukebox %>
 
+
+<!--
 <p>
   <b>Name:</b>
   <%= @jukebox.name %>
@@ -14,7 +16,7 @@
   <b>Dashboard:</b>
   <%= @jukebox.dashboard_id %>
 </p>
-
+-->
 
 <%= link_to 'Edit', edit_jukebox_path(@jukebox) %> |
 <%= link_to 'Back', jukeboxes_path %>

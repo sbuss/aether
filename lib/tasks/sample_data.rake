@@ -23,6 +23,7 @@ namespace :db do
 
     # Create a song
     s = Song.create(:name => "Ellie Golding - Lights (Bassnectar Remix)",
-              :grooveshark_song_id => 29008173)
+              :grooveshark_song_id => 29008173,
+              :jukebox_id => j)
   end
 end
