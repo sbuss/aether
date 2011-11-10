@@ -67,5 +67,20 @@ namespace :db do
               :grooveshark_song_id => 43501,
               :album_art => "stones.jpg",
               :jukebox_id => j)
+    Song.create!(:artist => "Crosby, Stills, And Nash",
+              :name => "Cathedral",
+              :grooveshark_song_id => 14662325,
+              :album_art => "csn.jpg",
+              :jukebox_id => j)
+    Song.create!(:artist => "The Arcade Fire",
+              :name => "Naive Melody",
+              :grooveshark_song_id => 28148526,
+              :album_art => "arcadefire.jpg",
+              :jukebox_id => j)
+    Song.create!(:artist => "Otis Redding",
+              :name => "(Sittin' On) The Dock of the Bay",
+              :grooveshark_song_id => 23332991,
+              :album_art => "otis.jpg",
+              :jukebox_id => j)
   end
 end
