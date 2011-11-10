@@ -3,6 +3,7 @@ namespace :db do
   task :populate => :environment do
     Rake::Task['db:reset'].invoke
     admin = User.create!(:name => "Example User")
+    steven = User.create(:name => "Steven Buss", :facebook_id => 2033308)
     99.times do |n|
       name = Faker::Name.name
       email = "example-#{n+1}@tourioushq.com"
@@ -60,7 +61,7 @@ namespace :db do
     Song.create!(:artist => "The Shins",
               :name => "Kissing the Lipless",
               :grooveshark_song_id => 7288033,
-              :album_art => "shins.jpg",
+              :album_art => "shins.gif",
               :jukebox_id => j)
     Song.create!(:artist => "The Rolling Stones",
               :name => "Paint it Black",
@@ -75,7 +76,7 @@ namespace :db do
     Song.create!(:artist => "The Arcade Fire",
               :name => "Naive Melody",
               :grooveshark_song_id => 28148526,
-              :album_art => "arcadefire.jpg",
+              :album_art => "arcadefire.png",
               :jukebox_id => j)
     Song.create!(:artist => "Otis Redding",
               :name => "(Sittin' On) The Dock of the Bay",

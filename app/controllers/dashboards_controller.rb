@@ -36,6 +36,7 @@ class DashboardsController < ApplicationController
   # GET /dashboards/1
   # GET /dashboards/1.xml
   def show
+    sign_out
     @dashboard = Dashboard.find_by_url(params[:id])
 #    @songs = Song.all
     @jukebox = Jukebox.where(:dashboard_id => @dashboard)

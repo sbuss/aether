@@ -2,6 +2,11 @@
 <div id="lifeLine"><div class="llTop"></div><div class="llLine"></div></div>
 
 <ul class="tasks">
+    <% if signed_in? %>
+      <li>User logged in as <%= current_user.name %></li>
+    <% else %>
+      <li>User not signed in</li>
+    <% end %>
     <li>Record votes</li>
     <li>Smiley slider</li   >
    <li> Login with Facebook</li> 
@@ -10,6 +15,7 @@
     <li>play music</li>
     <li>QR code to launch site on phone</li>
 </ul>
+
 
 
 <%= render @jukebox %>
