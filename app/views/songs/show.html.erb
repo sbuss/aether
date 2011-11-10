@@ -1,19 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @song.name %>
-</p>
-
-<p>
-  <b>Url:</b>
-  <%= @song.url %>
-</p>
-
-<p>
-  <b>Grooveshark song:</b>
-  <%= @song.grooveshark_song_id %>
-</p>
+<%= render @song %>
 
 <%= render 'embedded_player', :song => @song %>
 
