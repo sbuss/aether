@@ -13,7 +13,11 @@ Aether::Application.routes.draw do
     end
   end
 
-  resources :jukeboxes
+  resources :jukeboxes do
+    collection do
+      get ':id/playing', :to => 'jukeboxes#now_playing'
+    end
+  end
 
   resources :votes
 
