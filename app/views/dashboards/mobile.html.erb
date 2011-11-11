@@ -30,9 +30,26 @@
 <%= render @songs %>
 </div>
 <script type="text/javascript">
-var voting_round_id;
+var voting_round;
+
 $(function() {
+    
+    $.get("/voting_rounds/current",
+        {"jukebox_id":1},
+        function(data) {
+            console.log(data);
+        }
+    );
+    
+    $("header div.headWrap").click(function() {
+        $("#slider").slideToggle("slow");
+    })
+    
+
+    
+    
 })
+
 
 // Fuck namespacing
 function setSongPercent (songDOM, percent) {
@@ -46,7 +63,7 @@ function setSongPercent (songDOM, percent) {
 
 function updatePerc() {
     //Grab current state of all songs
-    $.get("/songs/songsForVote?voting_round_id=" + voting_round_id, 
+    $.get("/songs/songsForVote?voting_round_id=" + voting_round, 
         function(data) {
             var totalVotes = 0;
             //Grab total votes
@@ -83,7 +100,7 @@ $(function () {
     
     
     // Request to update numbers
-    updatePerc()
+   // updatePerc()
     
     //Countdown timer until song changes
     var totalTime = 10,
