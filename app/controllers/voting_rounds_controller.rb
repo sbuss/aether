@@ -1,6 +1,11 @@
 class VotingRoundsController < ApplicationController
   def current_round
-    @voting_round = VotingRound.last
+    jukebox = params[:jukebox_id]
+    @voting_round = VotingRound.where(:jukebox_id => jukebox).last
+
+    respond_to do |format|
+      format.json  { render :json => @voting_round }
+    end
   end
 
   # GET /voting_rounds

@@ -2,6 +2,7 @@ Aether::Application.routes.draw do
   resources :voting_rounds do
     collection do
       post 'newrand', :to => 'voting_rounds#newRandomVotingRound', :as => "newRandomVotingRound"
+      get 'current', :to => 'voting_rounds#current_round', :as => "currentVotingRound"
     end
   end
 
