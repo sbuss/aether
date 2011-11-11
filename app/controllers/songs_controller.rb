@@ -5,9 +5,19 @@ class SongsController < ApplicationController
     @songs = Song.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.xml  { render :xml => @songs }
       format.json  { render :json => @songs }
+    end
+  end
+
+  def songsForVote
+    voting_round = VotingRound.find(params[:voting_round_id])
+    song_ids = [voting_round.song_id_1, voting_round.song_id_2, voting_round.song_id_3]
+    @songs = Song.where(:id => song_ids)
+    respond_to do |format|
+      format.html { render :partial => "songs/songs_for_vote" }
+      format.json { render :json => @songs }
     end
   end
 
