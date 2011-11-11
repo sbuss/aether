@@ -45,7 +45,7 @@ $(function() {
 function newVotingRound() {
     $.post("/voting_rounds/newrand?jukebox_id=<%= @jukebox.id %>",
         function(data) {
-            voting_round_id = data["voting_round"]["id"];
+            voting_round_id = data["id"];
             $.get("/songs/songsForVote?voting_round_id=" + voting_round_id,
                 function(data) {
                     // This is the list of songs for the current voting round.

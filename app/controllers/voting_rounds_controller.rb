@@ -8,6 +8,18 @@ class VotingRoundsController < ApplicationController
     end
   end
 
+  def tally
+    @voting_round = VotingRound.find(params[:id])
+    # Get the vote count per song
+    songs = Vote.find(:all, :select => "count(*), song_id", :group => "song_id", :conditions => ["voting_round_id = ?", @voting_round.id])
+    logger.info(songs)
+    @voting_round.winning_song_id = songs[0].song_id || nil
+    @voting_round.save
+    respond_to do |format|
+      format.json { render :json => @voting_round }
+    end
+  end
+
   # GET /voting_rounds
   # GET /voting_rounds.xml
   def index
