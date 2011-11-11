@@ -19,8 +19,6 @@ class DashboardsController < ApplicationController
     render :index
   end
 
-
-
   # GET /dashboards
   # GET /dashboards.xml
   def index
@@ -42,11 +40,12 @@ class DashboardsController < ApplicationController
     @jukebox = Jukebox.where(:dashboard_id => @dashboard)
     @songs = Song.where(:jukebox_id => @jukebox)
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @dashboard }
-      format.json  { render :json => @dashboards }
-    end
+    render :mobile if @browser == "mobile"
+    # respond_to do |format|
+    #   format.html # show.html.erb
+    #   format.xml  { render :xml => @dashboard }
+    #   format.json  { render :json => @dashboards }
+    # end
   end
 
   # GET /dashboards/new

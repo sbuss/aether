@@ -60,7 +60,7 @@ ul.tasks {
     font-size: 3em;
     margin: 40px 0;
 }
-.jb .fbimage {
+.fbimage {
     background:transparent url("/images/fb_profile.png") no-repeat center center;
     float:left;
     width:15px;
@@ -123,6 +123,40 @@ ul.tasks {
 
 /* /JukeBox */
 
+/* Time line */
+#tlContainer {
+    width:610px;margin:0 auto;
+    position:relative;
+    top:-1000px;
+
+}
+
+
+#tlContainer .tlItem {
+    background:transparent url('/images/tl_bg.png');
+    padding:3px;
+    width:280px;
+    color:#fff;
+    margin-bottom:20px;
+}
+
+#tlContainer .tlItem.left {
+    float:left;
+}
+
+#tlContainer .tlItem.right {
+    float:right;
+    position:relative;
+    top:30px;
+}
+
+#tlContainer .tlItem .tlHeader {
+    background:transparent url('/images/tl_head_bg.png') repeat left top
+}
+#tlContainer .tlItem .tlHeader h4{
+margin:0
+}
+
 #lifeLine {
     position:absolute;
     top:400px;
@@ -152,6 +186,7 @@ ul.tasks {
     
 }
 
+/* / Time line */
 .votingSong {
     position:relative;
     clear:left;

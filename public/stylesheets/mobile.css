@@ -1,0 +1,79 @@
+body {
+    background:#ccc url('/images/stripped_back.png') repeat left top;
+}
+h1.musicList {
+    border:1px solid silver;
+    border-width:2px 0;
+    padding:20px 0;
+}
+/* JukeBox */
+.jb {
+    margin:0 auto;
+    width:750px;
+    height:250px;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    background:transparent url(/images/jb_bg.png) no-repeat center center;
+    position:relative;    
+}
+
+.jb .content {
+    position:relative;
+    z-index:2;
+    padding:50px;
+    color:#fff;
+}
+
+
+.jb .album_info {
+    padding:20px 0 0 15px;
+
+}
+.jb .now_playing {
+    color:#FFF;
+    float:left;
+}
+.jb .pointer {
+    float:left;
+}
+.jb .pointer.red {
+    background:#af0200;
+}
+.jb .pointer.gray {
+    background:#2e302f;
+}
+
+.jb .song_title {
+    text-align:center;
+    font-size: 6em;
+    margin: 40px 0;
+}
+.fbimage {
+    background:transparent url("/images/fb_profile.png") no-repeat center center;
+    float:left;
+    width:15px;
+    height:15px;
+    margin:5px;
+}
+
+.playing_next {
+    clear:left;
+}
+.playing_next_title {
+    clear:left;
+    font-size:1.5em;
+    opacity:.75;
+}
+.album_art{
+    width:201px;
+    height:204px;
+    background:transparent url("/images/ab_art1.png") center center;
+    float:left;
+}
+
+.album_info {
+    float:left;
+}
+
+/* /Jukebox */

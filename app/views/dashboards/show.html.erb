@@ -19,8 +19,23 @@
 
 
 <%= render @jukebox %>
+<div id="tlContainer">
+    <% 20.times do |t| %>
+    <div class="tlItem <%= t%2 == 0 ? :left : :right %>">
+        <div class="tlHeader"><div class="fbimage"></div><span class="people"><h4>3 People</h4><span class="timeago">One hour ago<span></span></div>
+        <h3 class="action">Suggest listening to</h3>
+        <div class="album">
+            <span class="artist">Apple Blossom</span>
+            <span class="song">by Esperanza Spalding</span>
+        </div>
+    </div>    
+    <% end %>
+</div>
+
+
 <%= render @songs %>
 <!-- / Jukebox code -->
+
 
 <h2>Here's some random shit:</h2>
 <p id="notice"><%= notice %></p>
@@ -91,6 +106,14 @@ function updatePerc() {
     setTimeout(updatePerc, 1000)
 }
 $(function () {
+    //Slide widets in
+    
+    $('#tlContainer').animate( {"top":0}, 2000, "easeOutElastic" );
+    
+    
+    
+    
+    
     //voting
     $("div.votingSong").click(function() {
         $.post("/votes", { "vote[user_id]": 2, "vote[song_id]": $(this).attr("id").replace("song","") });
