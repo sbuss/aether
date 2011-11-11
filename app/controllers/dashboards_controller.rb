@@ -37,7 +37,7 @@ class DashboardsController < ApplicationController
     sign_out
     @dashboard = Dashboard.find_by_url(params[:id])
 #    @songs = Song.all
-    @jukebox = Jukebox.where(:dashboard_id => @dashboard)
+    @jukebox = Jukebox.where(:dashboard_id => @dashboard)[0]
     @songs = Song.where(:jukebox_id => @jukebox)
 
     render :mobile if @browser == "mobile"

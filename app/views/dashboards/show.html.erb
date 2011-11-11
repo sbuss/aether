@@ -44,7 +44,7 @@ $(function() {
     updatePerc()
 })
 function newVotingRound() {
-    $.post("/voting_rounds/newrand",
+    $.post("/voting_rounds/newrand?jukebox_id=<%= @jukebox.id %>",
         function(data) {
             voting_round_id = data["voting_round"]["id"];
             $.get("/songs/songsForVote?voting_round_id=" + voting_round_id,
