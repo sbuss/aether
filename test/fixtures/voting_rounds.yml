@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  winning_song_id: 1
+  song_id_1: 1
+  song_id_2: 1
+  song_id_3: 1
+
+two:
+  winning_song_id: 1
+  song_id_1: 1
+  song_id_2: 1
+  song_id_3: 1

@@ -33,49 +33,30 @@
 </div>
 
 
-<%= render @songs %>
-<!-- / Jukebox code -->
-
-
-<h2>Here's some random shit:</h2>
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @dashboard.name %>
-</p>
-
-<p>
-  <b>Url:</b>
-  <%= @dashboard.url %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= @dashboard.user_id %>
-</p>
-
-<p>
-  <b>Lat:</b>
-  <%= @dashboard.lat %>
-</p>
-
-<p>
-  <b>Lng:</b>
-  <%= @dashboard.lng %>
-</p>
-
-<p>
-  <b>Radius:</b>
-  <%= @dashboard.radius %>
-</p>
-
-
-<%= link_to 'Edit', edit_dashboard_path(@dashboard) %> |
-<%= link_to 'Back', dashboards_path %>
-
+<div id="song_votes"></div>
 
 <script type="text/javascript">
+var voting_round_id;
+$(function() {
+    newVotingRound();
+})
+function newVotingRound() {
+    $.post("/voting_rounds/newrand",
+        function(data) {
+            voting_round_id = data["voting_round"]["id"];
+            $.get("/songs/songsForVote?voting_round_id=" + voting_round_id,
+                function(data) {
+                    // This is the list of songs for the current voting round.
+                    // When the voting round finishes, call this function again!
+                    $("#song_votes").html(data);
+                    attachVotes();
+                }
+                
+            );
+        },
+        "json"
+    );
+}
 // Fuck namespacing
 function setSongPercent (songDOM, percent) {
     var $song = $(songDOM);
@@ -87,38 +68,39 @@ function setSongPercent (songDOM, percent) {
 }
 function updatePerc() {
     //Grab current state of all songs
-    $.get("/songs", 
+    $.get("/songs/songsForVote?voting_round_id=" + voting_round_id, 
         function(data) {
             var totalVotes = 0;
-        //Grab total votes
-        for(var i=0,l=data.length;i<l;i++) {
-            totalVotes += data[i].votes.length
-        }
+            //Grab total votes
+            for(var i=0,l=data.length;i<l;i++) {
+                totalVotes += data[i].votes.length
+            }
 
-        // update Songs 
-        for(var i=0;i<l;i++) {
-            var perc = (data[i].votes.length/totalVotes)*100;
-            setSongPercent($("#song"+data[i].id).eq(0), perc);
-        }
+            // update Songs 
+            for(var i=0;i<l;i++) {
+                var perc = (data[i].votes.length/totalVotes)*100;
+                setSongPercent($("#song"+data[i].id).eq(0), perc);
+            }
 
         }, 
     "json")
     setTimeout(updatePerc, 1000)
 }
+function attachVotes() {
+    //voting
+    $("div.votingSong").click(function() {
+        console.log("Got a click...");
+        console.log("Voting round is " + voting_round_id);
+        $.post("/votes", { "vote[user_id]": 2, "vote[song_id]": $(this).attr("id").replace("song",""), "vote[voting_round_id]": voting_round_id });
+        return false;
+    })
+}
+
 $(function () {
     //Slide widets in
     
     $('#tlContainer').animate( {"top":0}, 2000, "easeOutElastic" );
     
-    
-    
-    
-    
-    //voting
-    $("div.votingSong").click(function() {
-        $.post("/votes", { "vote[user_id]": 2, "vote[song_id]": $(this).attr("id").replace("song","") });
-        return false;
-    })
     
     
     // Request to update numbers

@@ -1,4 +1,10 @@
 Aether::Application.routes.draw do
+  resources :voting_rounds do
+    collection do
+      post 'newrand', :to => 'voting_rounds#newRandomVotingRound', :as => "newRandomVotingRound"
+    end
+  end
+
   resources :dashboards do
     collection do
       get 'nearby', :as => "nearby_dashboards"
@@ -9,7 +15,11 @@ Aether::Application.routes.draw do
 
   resources :votes
 
-  resources :songs
+  resources :songs do
+    collection do
+      get 'songsForVote', :to => "songs#songsForVote"
+    end
+  end
 
   resources :users
 
