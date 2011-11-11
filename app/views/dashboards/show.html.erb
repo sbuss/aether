@@ -39,6 +39,9 @@
 var voting_round_id;
 $(function() {
     newVotingRound();
+    
+    // Request to update numbers
+    updatePerc()
 })
 function newVotingRound() {
     $.post("/voting_rounds/newrand",
@@ -70,16 +73,24 @@ function updatePerc() {
     //Grab current state of all songs
     $.get("/songs/songsForVote?voting_round_id=" + voting_round_id, 
         function(data) {
+            votes = data.votes;
             var totalVotes = 0;
             //Grab total votes
-            for(var i=0,l=data.length;i<l;i++) {
-                totalVotes += data[i].votes.length
+            totalVotes = votes.length;
+            votes_per_song = {};
+            for(var i=0;i<totalVotes;i++) {
+                var song_id = votes[i].vote.song_id
+                if(votes_per_song[song_id]) {
+                    votes_per_song[song_id] += 1;
+                } else {
+                    votes_per_song[song_id] = 1;
+                }
             }
 
             // update Songs 
-            for(var i=0;i<l;i++) {
-                var perc = (data[i].votes.length/totalVotes)*100;
-                setSongPercent($("#song"+data[i].id).eq(0), perc);
+            for (var key in votes_per_song) {
+                var perc = (votes_per_song[key]/totalVotes)*100;
+                setSongPercent($("#song"+key).eq(0), perc);
             }
 
         }, 
@@ -102,9 +113,6 @@ $(function () {
     $('#tlContainer').animate( {"top":0}, 2000, "easeOutElastic" );
     
     
-    
-    // Request to update numbers
-    updatePerc()
     
     //Countdown timer until song changes
     var totalTime = 10,
