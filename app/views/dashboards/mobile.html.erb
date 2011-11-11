@@ -2,7 +2,7 @@
     <div class="fadeBack"></div>
     <div class="content">
         <div class="album_info">
-            <div class="now_playing"><div class="pointer red">NOW PLAYING</div></div>
+            <div class="now_playing"><div class="pointer red">NOW PLAYING<div class="point red"></div></div></div>
             <div class="song_title">Apple Blossom</div>
         </div>
     </div>  
@@ -25,4 +25,87 @@
         <br style="clear:both" />    
 </div>
 
-<h1 class="musicList">YCOMB COFFEE SONG LIST</h1>
+<h1 class="musicList">YC COFFEE SONG LIST</h1>
+<div id="allSongs">
+<%= render @songs %>
+</div>
+<script type="text/javascript">
+var voting_round_id;
+$(function() {
+})
+
+// Fuck namespacing
+function setSongPercent (songDOM, percent) {
+    var $song = $(songDOM);
+    //Set % text
+    $song.find("div.progBar span").text(percent+"%");
+    
+    //Set length of progressbar
+    $song.find("div.progBar").css("width", (percent+"%"));    
+}
+
+function updatePerc() {
+    //Grab current state of all songs
+    $.get("/songs/songsForVote?voting_round_id=" + voting_round_id, 
+        function(data) {
+            var totalVotes = 0;
+            //Grab total votes
+            for(var i=0,l=data.length;i<l;i++) {
+                totalVotes += data[i].votes.length
+            }
+
+            // update Songs 
+            for(var i=0;i<l;i++) {
+                var perc = (data[i].votes.length/totalVotes)*100;
+                setSongPercent($("#song"+data[i].id).eq(0), perc);
+            }
+
+        }, 
+    "json")
+    setTimeout(updatePerc, 1000)
+}
+
+function attachVotes() {
+    //voting
+    $("div.votingSong").click(function() {
+        console.log("Got a click...");
+        console.log("Voting round is " + voting_round_id);
+        $.post("/votes", { "vote[user_id]": 2, "vote[song_id]": $(this).attr("id").replace("song",""), "vote[voting_round_id]": voting_round_id });
+        return false;
+    })
+}
+
+$(function () {
+    //Slide widets in
+    
+    $('#tlContainer').animate( {"top":0}, 2000, "easeOutElastic" );
+    
+    
+    
+    // Request to update numbers
+    updatePerc()
+    
+    //Countdown timer until song changes
+    var totalTime = 10,
+        endTime = new Date(),
+        $timer = $("#countdown");
+    endTime.setSeconds(endTime.getSeconds() + totalTime);
+        
+        
+    (function countDown() {
+        var now = new Date(),
+            timeLeft = Math.floor((endTime-now)/1000),
+            formatted = timeLeft < 10 ? timeLeft < 0 ? "00": "0"+timeLeft : timeLeft;
+        $timer.text("00:"+formatted);
+            
+        if(endTime - now < 0) {
+            return;
+        } else {
+            setTimeout(countDown, 100)
+        }
+    })()    
+    
+    
+})
+
+</script>

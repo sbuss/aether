@@ -6,6 +6,14 @@ h1.musicList {
     border-width:2px 0;
     padding:20px 0;
 }
+.headWrap h1 {
+    margin-bottom:0;
+    color:orange;
+}
+.headWrap span.mv {
+    margin-bottom:0;
+    color:blue;
+}
 /* JukeBox */
 .jb {
     margin:0 auto;
@@ -35,10 +43,26 @@ h1.musicList {
     float:left;
 }
 .jb .pointer {
+    position:relative;
     float:left;
+    height:25px;
+    line-height:25px;
+    -webkit-border-radius: 10px 0 0 10px;
+    -moz-border-radius: 10px 0 0 10px;
+    border-radius: 10px 0 0 10px;   
+    padding:0 10px;
+    top:-10px;
 }
 .jb .pointer.red {
-    background:#af0200;
+    background:transparent url("/images/red_arrow_bg.png") repeat-x left center;
+}
+.jb .point.red {
+    background:transparent url("/images/red_arrow_point.png") no-repeat left center;
+    height:25px;
+    width:14px;
+    position:absolute;
+    right:-14px;
+    top:0;
 }
 .jb .pointer.gray {
     background:#2e302f;
@@ -77,3 +101,31 @@ h1.musicList {
 }
 
 /* /Jukebox */
+
+.votingSong {
+    float:left;
+    width:750px;
+    margin-bottom:25px;
+}
+
+.votingSong .album_art {
+    background:none;
+    width:150px;
+    height:150px;
+}
+.votingSong .album_art img {
+    width:150px;
+    height:150px;
+}
+.album_info h2.songName{
+    float:left;
+}
+
+.album_info h2.songArtist{
+    clear:left;
+}
+
+#allSongs {
+    width:750px;
+    margin:0 auto;
+}
