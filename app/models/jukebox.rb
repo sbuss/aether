@@ -16,7 +16,8 @@ class Jukebox < ActiveRecord::Base
       :id => self.id,
       :name => self.name,
       :dashboard => self.dashboard_id,
-      :songs => self.songs.map { |o| o.id }
+      :songs => self.songs.map { |o| o.id },
+      :now_playing => self.now_playing
     }
   end
 end

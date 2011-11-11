@@ -1,4 +1,15 @@
 class JukeboxesController < ApplicationController
+  def now_playing
+    jukebox = Jukebox.find(params[:id])
+    @song = Song.find(jukebox.now_playing)
+
+    respond_to do |format|
+      format.html { render :partial => "songs/song", :locals => { :song => @song } }
+      format.xml  { render :xml => @song }
+      format.json  { render :json => @song }
+    end
+  end
+
   # GET /jukeboxes
   # GET /jukeboxes.xml
   def index

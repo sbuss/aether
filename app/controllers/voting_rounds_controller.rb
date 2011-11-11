@@ -15,6 +15,10 @@ class VotingRoundsController < ApplicationController
     logger.info(songs)
     @voting_round.winning_song_id = songs[0].song_id || nil
     @voting_round.save
+    # Update the jukebox's now_playing
+    jukebox = Jukebox.find(@voting_round.jukebox_id)
+    jukebox.now_playing = songs[0].song_id
+    jukebox.save
     respond_to do |format|
       format.json { render :json => @voting_round }
     end
