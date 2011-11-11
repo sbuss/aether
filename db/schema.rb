@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111111062546) do
+ActiveRecord::Schema.define(:version => 20111111064459) do
 
   create_table "dashboards", :force => true do |t|
     t.string   "name"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20111111062546) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "voting_round_id"
   end
 
   create_table "voting_rounds", :force => true do |t|
