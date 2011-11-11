@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Winning song:</b>
+  <%= @voting_round.winning_song_id %>
+</p>
+
+<p>
+  <b>Song id 1:</b>
+  <%= @voting_round.song_id_1 %>
+</p>
+
+<p>
+  <b>Song id 2:</b>
+  <%= @voting_round.song_id_2 %>
+</p>
+
+<p>
+  <b>Song id 3:</b>
+  <%= @voting_round.song_id_3 %>
+</p>
+
+
+<%= link_to 'Edit', edit_voting_round_path(@voting_round) %> |
+<%= link_to 'Back', voting_rounds_path %>

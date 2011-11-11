@@ -1,4 +1,6 @@
 Aether::Application.routes.draw do
+  resources :voting_rounds
+
   resources :dashboards do
     collection do
       get 'nearby', :as => "nearby_dashboards"
