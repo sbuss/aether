@@ -41,6 +41,8 @@ var jukebox_id = <%= @jukebox.id %>;
 function newVotingRound() {
     $.post("/voting_rounds/newrand?jukebox_id=" + jukebox_id,
         function(data) {
+            console.log("made new voting round");
+            console.log(data);
             voting_round_id = data["id"];
             $.get("/jukeboxes/" + jukebox_id + "/songsForVoting",
                 function(data) {
@@ -75,8 +77,11 @@ function setSongPercent (songDOM, percent) {
 }
 function updatePerc() {
     //Grab current state of all songs
+    console.log("Updating percent");
+    console.log(jukebox_id);
     $.get("/jukeboxes/" + jukebox_id + "/songsForVoting", 
         function(data) {
+            console.log(data);
             votes = data.votes;
             var totalVotes = 0;
             //Grab total votes
