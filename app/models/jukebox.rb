@@ -10,6 +10,10 @@ class Jukebox < ActiveRecord::Base
   def to_param
     url
   end
+
+  def now_playing_song
+    Song.find(self.now_playing)
+  end
   
   def as_json(options = {})
     {
