@@ -17,10 +17,10 @@
     <%= render @jukebox %>
 </div>
 <div id="tlContainer">
-  <% i = 0 %>
+  <% event_counter = 0 %>
   <% @voting_rounds.each do |round| %>
-    <% i += 1 %>
-    <%= render :partial => "voting_rounds/voting_round", :locals => {:voting_round => round, :i => i } %>
+    <% event_counter += 1 %>
+    <%= render :partial => "voting_rounds/voting_round", :locals => {:voting_round => round, :i => event_counter } %>
   <% end %>
 </div>
 
@@ -32,11 +32,22 @@ var voting_round_id;
 
 var jukebox_id = <%= @jukebox.id %>;
 
+var event_counter = 0;
+
 function newSong() {
     $.get("/voting_rounds/"+voting_round_id+"/tally", function(d) {
+        addEventToStream();
         newVotingRound();
         updateNowPlaying();
     })    
+}
+
+function addEventToStream() {
+    $.get("/voting_rounds/" + voting_round_id + "/event?i=" + event_counter,
+        function(data) {
+            $(data).hide().prependTo($("div#tlContainer")).fadeIn('slow');
+            event_counter += 1;
+        });
 }
 
 function newVotingRound() {

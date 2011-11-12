@@ -24,6 +24,18 @@ class VotingRoundsController < ApplicationController
     end
   end
 
+  def event
+    @voting_round = VotingRound.find(params[:id])
+    i = params[:i].to_i
+    respond_to do |format|
+      format.html { render :partial => "voting_rounds/voting_round", 
+                    :locals => { :voting_round => @voting_round,
+                                 :i => i } }
+      format.xml { render :xml => @voting_round }
+      format.json { render :json => @voting_round }
+    end
+  end
+
   # GET /voting_rounds
   # GET /voting_rounds.xml
   def index

@@ -10,6 +10,7 @@ Aether::Application.routes.draw do
       post 'newrand', :to => 'voting_rounds#newRandomVotingRound', :as => "newRandomVotingRound"
       get 'current', :to => 'voting_rounds#current_round', :as => "currentVotingRound"
       get ':id/tally', :to => 'voting_rounds#tally'
+      get ':id/event', :to => 'voting_rounds#event'
     end
   end
 
