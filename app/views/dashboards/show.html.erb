@@ -17,7 +17,11 @@
     <%= render @jukebox %>
 </div>
 <div id="tlContainer">
-    <%= render @voting_rounds %>
+  <% i = 0 %>
+  <% @voting_rounds.each do |round| %>
+    <% i += 1 %>
+    <%= render :partial => "voting_rounds/voting_round", :locals => {:voting_round => round, :i => i } %>
+  <% end %>
 </div>
 
 

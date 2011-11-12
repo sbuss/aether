@@ -161,10 +161,10 @@ ul.tasks {
 
 /* Time line */
 #tlContainer {
-    width:610px;margin:0 auto;
+    width:610px;
+    margin:0 auto;
     position:relative;
     top:-1000px;
-
 }
 
 
@@ -173,17 +173,19 @@ ul.tasks {
     padding:3px;
     width:280px;
     color:#fff;
-    margin-bottom:20px;
+    margin-bottom:30px;
 }
 
 #tlContainer .tlItem.left {
     float:left;
+    clear: left;
 }
 
 #tlContainer .tlItem.right {
     float:right;
     position:relative;
     top:30px;
+    clear: right;
 }
 
 #tlContainer .tlItem .tlHeader {
