@@ -102,6 +102,11 @@ ul.tasks {
     font-size:1.5em;
     opacity:.75;
 }
+
+.album_art img {
+    width:201px;
+    height:204px;
+}
 .album_art{
     width:201px;
     height:204px;

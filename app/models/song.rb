@@ -18,6 +18,7 @@ class Song < ActiveRecord::Base
     {
       :id => self.id,
       :name => self.name,
+      :length => self.length,
       :artist => self.artist,
       :album_art => self.album_art,
       :grooveshark_song_id => self.grooveshark_song_id,

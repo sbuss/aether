@@ -41,7 +41,6 @@ function newSong() {
     $.get("/voting_rounds/"+voting_round_id+"/tally", function(d) {
         newVotingRound();
         updateNowPlaying();
-        countDownTimer();
     })    
 }
 
@@ -69,6 +68,14 @@ function updateNowPlaying() {
         function(data) {
             $("#jukebox").find("div.content").html(data)
         });
+        
+    
+    $.get("/jukeboxes/" + jukebox_id + "/playing",
+        function(d) {
+            countDownTimer(Number(d['length']+3));
+        },
+        "json");
+        
 }
 // Fuck namespacing
 function setSongPercent (songDOM, percent) {
@@ -118,8 +125,8 @@ function attachVotes() {
 
 var timerTracker;
 //Countdown timer until song changes
-  function countDownTimer() {
-      var totalTime = 30,
+  function countDownTimer(time) {
+      var totalTime = time || 30,
           endTime = new Date(),
           $timer = $("#countdown");
       endTime.setSeconds(endTime.getSeconds() + totalTime);
@@ -131,9 +138,12 @@ var timerTracker;
       (function countDown() {          
           var now = new Date(),
               timeLeft = Math.floor((endTime-now)/1000),
-              formatted = timeLeft < 10 ? timeLeft < 0 ? "00": "0"+timeLeft : timeLeft;
-          $timer.html(formatted + "<br /><span>seconds</span>");
-          
+              m = timeLeft/60 < 0 ? 0 : Math.floor(timeLeft/60),
+              fm = (""+m).length < 2 ? "0"+m : m,
+              s = timeLeft%60 < 0 ? 0 : timeLeft%60,
+              fs = (""+s).length < 2 ? "0"+s : s, 
+              formatted = fm+":"+fs;
+          $timer.html(formatted);
           if(endTime - now < 0) {
               newSong();
               return;
@@ -157,7 +167,6 @@ $(function () {
     attachVotes();
     updateNowPlaying();
     
-    countDownTimer();
     // Request to update numbers
     updatePerc()
     
