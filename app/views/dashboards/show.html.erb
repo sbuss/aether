@@ -113,7 +113,7 @@ function updatePerc() {
 
             // update Songs 
             for (var key in votes_per_song) {
-                var perc = (votes_per_song[key]/totalVotes)*100;
+                var perc = Math.round((votes_per_song[key]/totalVotes)*100);
                 setSongPercent($("#song"+key).eq(0), perc);
             }
 
