@@ -16,16 +16,13 @@ Aether::Application.routes.draw do
   resources :jukeboxes do
     collection do
       get ':id/playing', :to => 'jukeboxes#now_playing'
+      get ':id/songsForVoting', :to => 'jukeboxes#songsForVote'
     end
   end
 
   resources :votes
 
-  resources :songs do
-    collection do
-      get 'songsForVote', :to => "songs#songsForVote"
-    end
-  end
+  resources :songs
 
   resources :users
 
