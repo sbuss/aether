@@ -27,8 +27,16 @@
 
 
 <div id="song_votes">
-<h2>Currently voting</h2>
-<div class="inner"></div>
+
+    <div id="happiness">
+        <h2>Currently Happiness</h2>
+        <div id="slider" style="margin-left:-50px"></div>
+    </div>
+    <div style="clear:left;margin-top:15px">
+        <h2>Currently voting</h2>
+        <div class="inner"></div>
+    </div>
+
 </div>
 
 <script type="text/javascript">
@@ -164,7 +172,28 @@ var timerTracker;
       })()   
   }
 
+  function updateHappiness() {
+        $.get("/smileys/current_happiness",
+        function(d) {
+            smiley.position((d.current_happiness/100))
+            setTimeout(updateHappiness, 1000) 
+        })
+
+  }
+var smiley;
 $(function () {
+    //Smiley
+      smiley = new SmileySlider(document.getElementById("slider"))
+
+      var p = smiley.position() // get it's position
+      smiley.position(p / 2) // make it half as happy
+      
+      //function when it changes
+      smiley.position(function (p) {})
+
+      updateHappiness();
+    
+    
     $("button.skipSong").button().click(function() {
        newSong();
     });    

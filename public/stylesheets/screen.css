@@ -92,8 +92,8 @@ ul.tasks {
 .fbimage {
     background:transparent url("/images/fb_profile.png") no-repeat center center;
     float:left;
-    width:15px;
-    height:15px;
+    width:30px;
+    height:30px;
     margin:5px;
 }
 
