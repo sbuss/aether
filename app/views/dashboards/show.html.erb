@@ -65,6 +65,7 @@ function updateNowPlaying() {
 }
 // Fuck namespacing
 function setSongPercent (songDOM, percent) {
+    
     var $song = $(songDOM);
     //Set % text
     $song.find("div.progBar span").text(percent+"%");

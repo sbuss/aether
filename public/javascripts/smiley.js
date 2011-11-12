@@ -3,7 +3,7 @@ function SmileySlider(container, imgSrc) {
     if (!imgSrc)
         imgSrc = "/images/smiley-slider.png"
 
-    var width = 750
+    var width = 250
     var height = 37
     
     var headWidth = 40

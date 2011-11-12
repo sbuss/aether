@@ -1,85 +1,49 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html> 
+<html> 
+
 <head>
-  <title>Aether - Mobile</title>
-  <%= stylesheet_link_tag 'normalize.css', 'scaffold.css', 'screen.css', 'mobile.css' %>
-  <%= javascript_include_tag :defaults %>
-  <%= javascript_include_tag "smiley" %> 
-  <%= csrf_meta_tag %>
-  
-  <script type="text/javascript">
-  function loadSmiley() {
-      var s = new SmileySlider(document.getElementById("slider"))
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Single page template</title> 
+	  <%= stylesheet_link_tag "jqm.min.css",'mobile.css' %>
+	  <%= javascript_include_tag :defaults %>
+      <%= javascript_include_tag "smiley", "jqm.min.js" %>
+      <%= csrf_meta_tag %>
+      <script type="text/javascript">
+            function loadSmiley() {
+                var s = new SmileySlider(document.getElementById("slider"))
 
-      s.position(0) // make it sad
-      s.position(1) // make it happy
+                s.position(0) // make it sad
+                s.position(1) // make it happy
 
-      var p = s.position() // get it's position
-      s.position(p / 2) // make it half as happy
+                var p = s.position() // get it's position
+                s.position(p / 2) // make it half as happy
 
-      s.position(function (p) {
-          // do something when it changes
-      })
-  }
-   //  window.fbAsyncInit = function() {
-   //     FB.init({
-   //       appId      : '134448519991788', // App ID
-   //       status     : true, // check login status
-   //       cookie     : true, // enable cookies to allow the server to access the session
-   //       oauth      : true, // enable OAuth 2.0
-   //       xfbml      : true  // parse XFBML
-   //     });
-   // 
-   //     // Additional initialization code here
-   //     
-   //     FB.getLoginStatus(function(response) {
-   //       if (response.authResponse) {
-   //           FB.api('/me', function(response) {
-   //               $("#name").text(response.name)
-   //             });
-   //         // logged in and connected user, someone you know
-   //       } else {
-   //           FB.Event.subscribe('auth.login', function(response) {
-   //               FB.api('/me', function(response) {
-   //                   $("#name").text(response.name)
-   //                 });
-   //             // do something with response
-   //           });
-   //           FB.login();
-   //         // no user session available, someone you dont know
-   //       }
-   //     });
-   // 
-   // };
-   // 
-   //   // Load the SDK Asynchronously
-   //   (function(d){
-   //      var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
-   //      js = d.createElement('script'); js.id = id; js.async = true;
-   //      js.src = "//connect.facebook.net/en_US/all.js";
-   //      d.getElementsByTagName('head')[0].appendChild(js);
-   //    }(document));
-     
+                s.position(function (p) {
+                    // do something when it changes
+                })
+            }
+        </script>
+</head> 
 
-  </script>
-</head>
-<body onload="loadSmiley()">
-    <div id="fb-root"></div>
-    
-    <header style="text-align:center;">
-        <div class="headWrap" style="width:750px;margin:0 auto;text-align:left;height:85px;background:transparent url('/images/yc_mobile_bg.jpg') no-repeat left center">
-            <div class="left" style="float:left">
-                <h1>YC COFFEE</h1>
-                <span class="mv">MUSICVIBE</span>
-            </div>
-            <div class="right" style="float:right">
-                <span id="name"></span>
-                FB
-            </div>
+<body onload="loadSmiley()"> 
+
+<div data-role="page">
+	<div data-role="header">
+		<h1>YC Coffee House</h1>
+	</div><!-- /header -->
+	<div data-role="content">	
+	    <%= yield %>
+	    <div data-role="collapsible" data-collapsed="false" data-theme="b">
+           <h3>How are you feeling?</h3>
+           <div id="slider"></div>
         </div>
-        <div id="slider"></div>
-    </header>
-<%= yield %>
+	</div><!-- /content -->
+	<div data-role="footer">
+		<h4>Footer content</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
 
 </body>
 </html>
+
