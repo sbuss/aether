@@ -21,7 +21,9 @@
 <script type="text/javascript">
 var voting_round_id;
 var jukebox_id = <%= @jukebox.id %>;
-$(function() {
+
+
+function loadVotingRound() {
     $.get("/voting_rounds/current",
         {"jukebox_id":jukebox_id},
         function(data) {
@@ -55,13 +57,9 @@ $(function() {
          
      );
     
+    updatePerc();
     
-    
-    $("header div.headWrap").click(function() {
-        $("#slider").slideToggle("slow");
-    })
-
-})
+}
 
 
 // Fuck namespacing
@@ -74,10 +72,18 @@ function setSongPercent (songDOM, percent) {
     $song.find("div.progBar").css("width", (percent+"%"));    
 }
 
+var percTimeout;
+
 function updatePerc() {
     //Grab current state of all songs
     $.get("/jukeboxes/" + jukebox_id + "/songsForVoting", 
         function(data) {
+            if(data.voting_round_id != voting_round_id) {
+                $.mobile.showPageLoadingMsg();
+                clearTimeout(percTimer);
+                loadVotingRound();
+                return;
+            }
             $.mobile.hidePageLoadingMsg();
             votes = data.votes;
             var totalVotes = 0;
@@ -101,7 +107,7 @@ function updatePerc() {
 
         }, 
     "json")
-    setTimeout(updatePerc, 1000)
+    percTimer = setTimeout(updatePerc, 1000)
 }
 
 function attachVotes() {
@@ -114,16 +120,14 @@ function attachVotes() {
 }
 
 $(function () {
+    loadVotingRound();
+
+    $("header div.headWrap").click(function() {
+        $("#slider").slideToggle("slow");
+    })
     //Slide widets in
     
    // $('#tlContainer').animate( {"top":0}, 2000, "easeOutElastic" );
-    
-    
-    
-    // Request to update numbers
-    updatePerc()
-    
-    
 })
 
 </script>
