@@ -1,4 +1,10 @@
 Aether::Application.routes.draw do
+  resources :smileys do
+    collection do
+      get 'current_happiness', :to => "smileys#current_happiness"
+    end
+  end
+
   resources :voting_rounds do
     collection do
       post 'newrand', :to => 'voting_rounds#newRandomVotingRound', :as => "newRandomVotingRound"
