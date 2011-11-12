@@ -12,7 +12,12 @@ class Jukebox < ActiveRecord::Base
   end
 
   def now_playing_song
-    Song.find(self.now_playing)
+    if self.now_playing.nil?
+      s = Song.first
+    else
+      s = Song.find(self.now_playing)
+    end
+    s
   end
   
   def as_json(options = {})
