@@ -9,8 +9,9 @@ Aether::Application.routes.draw do
     collection do
       post 'newrand', :to => 'voting_rounds#newRandomVotingRound', :as => "newRandomVotingRound"
       get 'current', :to => 'voting_rounds#current_round', :as => "currentVotingRound"
-      get ':id/tally', :to => 'voting_rounds#tally'
+      get ':id/tally', :to => 'voting_rounds#tally', :as => "tally"
       get ':id/event', :to => 'voting_rounds#event'
+      get 'omgwtf', :to => 'voting_rounds#omgwtf'
     end
   end
 
@@ -23,7 +24,8 @@ Aether::Application.routes.draw do
   resources :jukeboxes do
     collection do
       get ':id/playing', :to => 'jukeboxes#now_playing'
-      get ':id/songsForVoting', :to => 'jukeboxes#songsForVote'
+      get ':id/songsForVoting', :to => 'jukeboxes#songsForVote', :as => :songsForVoting
+      get ':id/songsForVotingMobile', :to => 'jukeboxes#songsForVoteMobile', :as => :songsForVotingMobile
     end
   end
 

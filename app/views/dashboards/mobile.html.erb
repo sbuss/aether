@@ -46,7 +46,7 @@ function loadVotingRound() {
     
     
     // Get the songs up for vote
-    $.get("/jukeboxes/<%= @jukebox.id %>/songsForVoting",
+    $.get("/jukeboxes/<%= @jukebox.id %>/songsForVotingMobile",
          function(data) {
              // This is the list of songs for the current voting round.
              // When the voting round finishes, call this function again!
@@ -76,7 +76,7 @@ var percTimeout;
 
 function updatePerc() {
     //Grab current state of all songs
-    $.get("/jukeboxes/" + jukebox_id + "/songsForVoting", 
+    $.get("/jukeboxes/" + jukebox_id + "/songsForVotingMobile.json", 
         function(data) {
             if(data.voting_round_id != voting_round_id) {
                 $.mobile.showPageLoadingMsg();

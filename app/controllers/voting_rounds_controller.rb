@@ -1,4 +1,7 @@
 class VotingRoundsController < ApplicationController
+  def omgwtf
+  end
+
   def current_round
     jukebox = params[:jukebox_id]
     @voting_round = VotingRound.where(:jukebox_id => jukebox).last
@@ -11,6 +14,10 @@ class VotingRoundsController < ApplicationController
   def tally
     logger.info("Tallying the votes!")
     @voting_round = VotingRound.find(params[:id])
+    expire_page(songsForVoting_jukeboxes_path(@voting_round.jukebox_id))
+    expire_page(songsForVoting_jukeboxes_path(@voting_round.jukebox_id, :json))
+    expire_page(songsForVotingMobile_jukeboxes_path(@voting_round.jukebox_id))
+    expire_page(songsForVotingMobile_jukeboxes_path(@voting_round.jukebox_id, :json))
     # Get the vote count per song
     songs = Vote.find(:all, :select => "count(*) as cnt, song_id", :group => "song_id", :conditions => ["voting_round_id = ?", @voting_round.id], :order => "cnt DESC")
     logger.info(songs)
@@ -64,6 +71,10 @@ class VotingRoundsController < ApplicationController
   end
 
   def newRandomVotingRound
+    expire_page(songsForVoting_jukeboxes_path(params[:jukebox_id]))
+    expire_page(songsForVoting_jukeboxes_path(params[:jukebox_id], :json))
+    expire_page(songsForVotingMobile_jukeboxes_path(params[:jukebox_id]))
+    expire_page(songsForVotingMobile_jukeboxes_path(params[:jukebox_id], :json))
     @voting_round = VotingRound.new
     song_ids = Song.all.map(&:id).shuffle()[0..2]
     @voting_round.song_id_1 = song_ids[0]
@@ -109,6 +120,10 @@ class VotingRoundsController < ApplicationController
   # POST /voting_rounds
   # POST /voting_rounds.xml
   def create
+    expire_page(songsForVoting_jukeboxes_path(params[:jukebox_id]))
+    expire_page(songsForVoting_jukeboxes_path(params[:jukebox_id], :json))
+    expire_page(songsForVotingMobile_jukeboxes_path(params[:jukebox_id]))
+    expire_page(songsForVotingMobile_jukeboxes_path(params[:jukebox_id], :json))
     @voting_round = VotingRound.new(params[:voting_round])
 
     respond_to do |format|

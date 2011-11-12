@@ -1,4 +1,7 @@
 class JukeboxesController < ApplicationController
+  caches_page :songsForVote
+  caches_page :songsForVoteMobile
+
   def now_playing
     jukebox = Jukebox.find(params[:id])
     @song = jukebox.now_playing_song
@@ -12,6 +15,25 @@ class JukeboxesController < ApplicationController
       #  s = render_to_string :partial => "songs/now_playing_mobile", :type => "html", :locals => { :song => @song } 
       format.xml  { render :xml => @song }
       format.json  { render :json => @song }
+    end
+  end
+
+  def songsForVoteMobile
+    jukebox = Jukebox.find(params[:id])
+    voting_round = VotingRound.where(:jukebox_id => jukebox.id).last
+    song_ids = [voting_round.song_id_1, voting_round.song_id_2, voting_round.song_id_3]
+    @songs = Song.where(:id => song_ids)
+    @votes = Vote.where(:voting_round_id => voting_round)
+    respond_to do |format|
+      if (@browser == "mobile") 
+        format.html { render :partial => "songs/songs_for_vote_mobile"}
+      else 
+        format.html { render :partial => "songs/songs_for_vote" }
+      end
+      
+      format.json { render :json => { :songs => @songs, 
+                                      :votes => @votes, 
+                                      :voting_round_id => voting_round.id } }
     end
   end
 

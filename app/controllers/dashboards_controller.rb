@@ -39,6 +39,10 @@ class DashboardsController < ApplicationController
     @jukebox = Jukebox.where(:dashboard_id => @dashboard)[0]
     @songs = Song.where(:jukebox_id => @jukebox)
     @voting_rounds = VotingRound.where("jukebox_id = ? AND winning_song_id IS NOT NULL", @jukebox.id).order("created_at DESC")
+    expire_page(songsForVoting_jukeboxes_path(@jukebox.id))
+    expire_page(songsForVoting_jukeboxes_path(@jukebox.id, :json))
+    expire_page(songsForVotingMobile_jukeboxes_path(@jukebox.id))
+    expire_page(songsForVotingMobile_jukeboxes_path(@jukebox.id, :json))
     render :mobile if @browser == "mobile"
     # respond_to do |format|
     #   format.html # show.html.erb

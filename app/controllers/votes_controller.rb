@@ -44,6 +44,12 @@ class VotesController < ApplicationController
   # POST /votes.xml
   def create
     @vote = Vote.new(params[:vote])
+    voting_round = VotingRound.find(@vote.voting_round_id)
+    expire_page(songsForVoting_jukeboxes_path(voting_round.jukebox_id))
+    expire_page(songsForVoting_jukeboxes_path(voting_round.jukebox_id, :json))
+    expire_page(songsForVotingMobile_jukeboxes_path(voting_round.jukebox_id))
+    expire_page(songsForVotingMobile_jukeboxes_path(voting_round.jukebox_id, :json))
+    logger.info("Cleared cache for jukebox id #{voting_round.jukebox_id}")
 
     respond_to do |format|
       if @vote.save

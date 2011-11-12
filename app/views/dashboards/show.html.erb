@@ -107,7 +107,7 @@ function setSongPercent (songDOM, percent) {
 }
 function updatePerc() {
     //Grab current state of all songs
-    $.get("/jukeboxes/" + jukebox_id + "/songsForVoting", 
+    $.get("/jukeboxes/" + jukebox_id + "/songsForVoting.json", 
         function(data) {
             votes = data.votes;
             var totalVotes = 0;
