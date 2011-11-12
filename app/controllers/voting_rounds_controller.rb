@@ -9,11 +9,16 @@ class VotingRoundsController < ApplicationController
   end
 
   def tally
+    logger.info("Tallying the votes!")
     @voting_round = VotingRound.find(params[:id])
     # Get the vote count per song
-    songs = Vote.find(:all, :select => "count(*), song_id", :group => "song_id", :conditions => ["voting_round_id = ?", @voting_round.id])
+    songs = Vote.find(:all, :select => "count(*) as cnt, song_id", :group => "song_id", :conditions => ["voting_round_id = ?", @voting_round.id], :order => "cnt DESC")
     logger.info(songs)
-    @voting_round.winning_song_id = songs[0] ? songs[0].song_id : @voting_round.song_id_1
+    if songs.count > 0
+      @voting_round.winning_song_id = songs[0].song_id
+    else
+      @voting_round.winning_song_id = @voting_round.song_id_1
+    end
     @voting_round.save
     # Update the jukebox's now_playing
     jukebox = Jukebox.find(@voting_round.jukebox_id)
