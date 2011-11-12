@@ -11,4 +11,8 @@ class VotingRound < ActiveRecord::Base
       :updated_at => self.updated_at
     }
   end
+
+  def winning_song
+    Song.find(self.winning_song_id)
+  end
 end

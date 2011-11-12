@@ -38,6 +38,7 @@ class DashboardsController < ApplicationController
 #    @songs = Song.all
     @jukebox = Jukebox.where(:dashboard_id => @dashboard)[0]
     @songs = Song.where(:jukebox_id => @jukebox)
+    @voting_rounds = VotingRound.where("jukebox_id = ? AND winning_song_id NOT NULL", @jukebox.id)
     render :mobile if @browser == "mobile"
     # respond_to do |format|
     #   format.html # show.html.erb
