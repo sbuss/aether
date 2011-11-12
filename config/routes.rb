@@ -3,6 +3,7 @@ Aether::Application.routes.draw do
     collection do
       post 'newrand', :to => 'voting_rounds#newRandomVotingRound', :as => "newRandomVotingRound"
       get 'current', :to => 'voting_rounds#current_round', :as => "currentVotingRound"
+      get ':id/tally', :to => 'voting_rounds#tally'
     end
   end
 
@@ -12,7 +13,11 @@ Aether::Application.routes.draw do
     end
   end
 
-  resources :jukeboxes
+  resources :jukeboxes do
+    collection do
+      get ':id/playing', :to => 'jukeboxes#now_playing'
+    end
+  end
 
   resources :votes
 
