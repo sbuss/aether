@@ -15,4 +15,12 @@ class VotingRound < ActiveRecord::Base
   def winning_song
     Song.find(self.winning_song_id)
   end
+
+  def num_winning_votes
+    Vote.where("voting_round_id = ? AND song_id = ?", self.id, self.winning_song_id).count
+  end
+
+  def format_time
+    self.updated_at.strftime("%b %d at %H:%M")
+  end
 end

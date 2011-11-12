@@ -173,7 +173,7 @@ ul.tasks {
     padding:3px;
     width:280px;
     color:#fff;
-    margin-bottom: -30px;
+    margin-bottom: -50px;
 }
 
 #tlContainer .tlItem.left {
@@ -191,6 +191,10 @@ ul.tasks {
 }
 #tlContainer .tlItem .tlHeader h4{
 margin:0
+}
+#tlContainer .tlItem .album {
+    font-size: 1.3em;
+    padding: 5px;
 }
 
 #lifeLine {
@@ -238,22 +242,58 @@ margin:0
     height:50px;
     width:0;
     margin-left:20px;
+    background-color: #3D5C99;
 }
 
 .progBar span{
     float:right;
 }
 
-#song1 .progBar {
-    background-color:green;
+
+#song_votes {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 250px;
+  z-index: 5;
+  background: rgba(0,0,0,0.5);
 }
 
-
-#song2 .progBar {
-    background-color:red;
+#song_votes div.votingSong {
+  width: 100%;
 }
 
+#song_votes h2 {
+  font-size: 12px;
+  margin: 2px;
+  padding: 0px;
+}
 
-#song3 .progBar {
-    background-color:yellow;
+#song_votes div.votes {
+  height: 15px;
+  width: 100px;
+  margin: 2px;
+  font-size: 10px;
+  clear: none;
+  float: left;
+}
+
+#song_votes div.progBar {
+  height: 15px;
+  float: left;
+  margin: 0px;
+}
+
+#song_votes .album_info {
+  width: 150px;
+}
+#song_votes .album_art {
+  height: 80px;
+  width: 80px;
+  margin: 2px;
+  padding: 0px;
+}
+#song_votes img {
+  height: inherit;
+  width: inherit;
 }

@@ -1,8 +1,16 @@
 <div class="tlItem <%= i%2 == 0 ? :left : :right %>">
-    <div class="tlHeader"><div class="fbimage"></div><span class="people"><h4>3 People</h4><span class="timeago">One hour ago<span></span></div>
-    <h3 class="action">Suggest listening to</h3>
+    <div class="tlHeader">
+      <div class="fbimage"></div>
+      <span class="people">
+        <h4><%= pluralize voting_round.num_winning_votes, "Person" %></h4>
+        <span class="timeago"><%= voting_round.format_time %><span>
+      </span>
+    </div>
     <div class="album">
-        <span class="artist"><%= voting_round.winning_song.name %></span>
-        <span class="song">by <%= voting_round.winning_song.artist %></span>
+      <img style="height: 80px; width: 80px; float: left; padding: 3px;" src="/images/albums/<%= voting_round.winning_song.album_art %>" />
+      <div class="song_title">
+        <%= voting_round.winning_song.name %><br />
+        <%= voting_round.winning_song.artist %>
+      </div>
     </div>
 </div>    

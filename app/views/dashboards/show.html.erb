@@ -22,10 +22,14 @@
     <% event_counter += 1 %>
     <%= render :partial => "voting_rounds/voting_round", :locals => {:voting_round => round, :i => event_counter } %>
   <% end %>
+  <br style="clear: both" />
 </div>
 
 
-<div id="song_votes"></div>
+<div id="song_votes">
+<h2>Currently voting</h2>
+<div class="inner"></div>
+</div>
 
 <script type="text/javascript">
 var voting_round_id;
@@ -59,7 +63,7 @@ function newVotingRound() {
                 function(data) {
                     // This is the list of songs for the current voting round.
                     // When the voting round finishes, call this function again!
-                    $("#song_votes").html(data);
+                    $("#song_votes").find("div.inner").html(data);
                     
                 }
                 
