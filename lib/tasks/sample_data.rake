@@ -23,17 +23,17 @@ namespace :db do
                   :dashboard => d)
 
     # Create songs
-    Song.create(:artist => "Ellie Golding",
+    s1 = Song.create(:artist => "Ellie Golding",
               :name => "Lights (Bassnectar Remix)",
               :grooveshark_song_id => 29008173,
               :album_art => "lights.jpg",
               :jukebox_id => j)
-    Song.create(:artist => "Maroon 5",
+    s2 = Song.create(:artist => "Maroon 5",
               :name => "Moves like Jagger",
               :grooveshark_song_id => 31315624,
               :album_art => "jagger.jpg",
               :jukebox_id => j)
-    Song.create(:artist => "Lil' Wayne",
+    s3 = Song.create(:artist => "Lil' Wayne",
               :name => "How to love",
               :grooveshark_song_id => 30719004,
               :album_art => "howtolove.jpg",
@@ -83,5 +83,10 @@ namespace :db do
               :grooveshark_song_id => 23332991,
               :album_art => "otis.jpg",
               :jukebox_id => j)
+
+    VotingRound.create(:song_id_1 => s1.id,
+                       :song_id_2 => s2.id,
+                       :song_id_3 => s3.id,
+                       :jukebox_id => j.id)
   end
 end
