@@ -78,6 +78,7 @@ function updatePerc() {
     //Grab current state of all songs
     $.get("/jukeboxes/" + jukebox_id + "/songsForVoting", 
         function(data) {
+            $.mobile.hidePageLoadingMsg();
             votes = data.votes;
             var totalVotes = 0;
             //Grab total votes
@@ -94,7 +95,7 @@ function updatePerc() {
 
             // update Songs 
             for (var key in votes_per_song) {
-                var perc = (votes_per_song[key]/totalVotes)*100;
+                var perc = Math.round((votes_per_song[key]/totalVotes)*100);
                 setSongPercent($("#song"+key).eq(0), perc);
             }
 
@@ -106,6 +107,7 @@ function updatePerc() {
 function attachVotes() {
     //voting
     $("div.songForVote").click(function() {
+        $.mobile.showPageLoadingMsg();
         $.post("/votes", { "vote[user_id]": 2, "vote[song_id]": $(this).attr("id").replace("song",""), "vote[voting_round_id]": voting_round_id });
         return false;
     })
@@ -114,32 +116,12 @@ function attachVotes() {
 $(function () {
     //Slide widets in
     
-    $('#tlContainer').animate( {"top":0}, 2000, "easeOutElastic" );
+   // $('#tlContainer').animate( {"top":0}, 2000, "easeOutElastic" );
     
     
     
     // Request to update numbers
     updatePerc()
-    
-    //Countdown timer until song changes
-    var totalTime = 10,
-        endTime = new Date(),
-        $timer = $("#countdown");
-    endTime.setSeconds(endTime.getSeconds() + totalTime);
-        
-        
-    (function countDown() {
-        var now = new Date(),
-            timeLeft = Math.floor((endTime-now)/1000),
-            formatted = timeLeft < 10 ? timeLeft < 0 ? "00": "0"+timeLeft : timeLeft;
-        $timer.text("00:"+formatted);
-            
-        if(endTime - now < 0) {
-            return;
-        } else {
-            setTimeout(countDown, 100)
-        }
-    })()    
     
     
 })

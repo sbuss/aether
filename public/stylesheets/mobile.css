@@ -24,6 +24,18 @@ margin-top:-10;
     width:auto;
 }
 
+.votes {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.progBar {
+    color:#fff;
+    background:blue;
+    width:0;
+}
 /* /jquery overrides */
 
 .albumArt img{
@@ -34,6 +46,7 @@ margin-top:-10;
 .songForVote {
     float:left;
     width:100%;
+    margin-bottom:10px;
 }
 
 body {
@@ -53,6 +66,13 @@ h1.musicList {
     color:blue;
 }
 
+h2.songName, h2.songArtist {
+    font-size:1em;
+    margin:5px;
+}
+h2.songArtist {
+    font-weight:normal;
+}
 #slider {
     width:250px;
     margin:5px auto;
