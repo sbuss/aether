@@ -45,6 +45,9 @@ class SmileysController < ApplicationController
   # POST /smileys.xml
   def create
     @smiley = Smiley.new(params[:smiley])
+    if @smiley.user_id.nil?
+      @smiley.user_id = current_user.id
+    end
 
     respond_to do |format|
       if @smiley.save
