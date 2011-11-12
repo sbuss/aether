@@ -15,6 +15,9 @@
                   xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
               }
           });
+          
+          var sOpen = true;
+          
             function loadSmiley() {
                 var s = new SmileySlider(document.getElementById("slider"))
 
@@ -27,11 +30,14 @@
                 //function when it changes
                 s.position(function (p) {})
                 
-                
                 $(s).bind("update", function(e,d) {
-                    $.post("/smileys", 
-                        {"smiley[value]":(d*100)}
-                    )
+                    if(sOpen){
+                        sOpen = false;
+                        $.post("/smileys", 
+                            {"smiley[value]":(d*100)},
+                            function() {s.position(d);sOpen = true;}
+                        )
+                    }
                 })
 
             }
