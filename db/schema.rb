@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111112023139) do
+ActiveRecord::Schema.define(:version => 20111112060158) do
 
   create_table "dashboards", :force => true do |t|
     t.string   "name"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20111112023139) do
     t.integer  "jukebox_id"
     t.string   "artist"
     t.string   "album_art"
+    t.integer  "length"
   end
 
   create_table "users", :force => true do |t|

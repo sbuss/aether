@@ -14,7 +14,7 @@ class SongsController < ApplicationController
   # GET /songs/1
   # GET /songs/1.xml
   def show
-    @song = Song.find_by_url(params[:id])
+    @song = Song.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
