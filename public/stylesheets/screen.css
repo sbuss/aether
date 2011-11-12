@@ -173,19 +173,17 @@ ul.tasks {
     padding:3px;
     width:280px;
     color:#fff;
-    margin-bottom:30px;
+    margin-bottom: -30px;
 }
 
 #tlContainer .tlItem.left {
     float:left;
-    clear: left;
+    clear: right;
 }
 
 #tlContainer .tlItem.right {
     float:right;
-    position:relative;
-    top:30px;
-    clear: right;
+    clear: left;
 }
 
 #tlContainer .tlItem .tlHeader {
