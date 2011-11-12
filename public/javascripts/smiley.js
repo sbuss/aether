@@ -82,7 +82,7 @@ function SmileySlider(container, imgSrc) {
     setTimeout(function () {
         position(0.5)
     }, 0)
-
+    var smiley = this;
     //////////////////////////////////////////////////////////////
     // mouse
 
@@ -108,6 +108,7 @@ function SmileySlider(container, imgSrc) {
         document.onmouseup = function (e) {
             document.onmousemove = oldMove
             document.onmouseup = oldUp
+            $(smiley).trigger("MOVED", position());
         }
     }
 

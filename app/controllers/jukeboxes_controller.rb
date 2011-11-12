@@ -1,7 +1,7 @@
 class JukeboxesController < ApplicationController
   def now_playing
     jukebox = Jukebox.find(params[:id])
-    @song = Song.find(jukebox.now_playing)
+    @song = jukebox.now_playing_song
 
     respond_to do |format|
        if (@browser == "mobile") 

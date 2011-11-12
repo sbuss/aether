@@ -18,10 +18,20 @@
 
                 var p = s.position() // get it's position
                 s.position(p / 2) // make it half as happy
-
-                s.position(function (p) {
-                    // do something when it changes
+                
+                //function when it changes
+                s.position(function (p) {})
+                
+                
+                $(s).bind("MOVED", function(e,d) {
+                    $.post("/smileys", 
+                        {"smiley[value]":(d*100)}
+                    )
                 })
+                    // do something when it changes
+                    // $.post("/smileys", 
+                    //                         {"smiley[value]":(p*100)});
+                    //                     })
             }
         </script>
 </head> 

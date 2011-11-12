@@ -1,5 +1,5 @@
 <div data-role="collapsible" data-theme="a"  data-content-theme="b">
-   <h3>Currently playing -<span id="cp_title"></span> by <span id="cp_artist"></span></h3>
+   <h3>Currently playing -<span id="cp_title_artist"></span></h3>
    <div class="ui-grid-a votingList" style="clear:left">
    	<div class="ui-block-a albumArt"><img id="cp_art" src="" /></div>
    	<div class="ui-block-b"><span id="cp_dd_title"></span><br /><span id="cp_dd_artist"></span></div>
@@ -32,17 +32,20 @@ $(function() {
     // Get the current song playing
     $.get("/jukeboxes/<%= @jukebox.id %>/playing",
         function(d) {
-            $("#cp_title, #cp_dd_title").text(d.name);
-            $("#cp_artist, #cp_dd_artist").text(d.artist);
+            console.log(d)
+            $("#cp_dd_title").text(d.name);
+            $("#cp_dd_artist").text(d.artist);
             $("#cp_art").attr("src",'/images/albums/'+d.album_art)
         },
         "json"    
     )
     
+
+    
+    
     // Get the songs up for vote
     $.get("/jukeboxes/<%= @jukebox.id %>/songsForVoting",
          function(data) {
-             console.log(data);
              // This is the list of songs for the current voting round.
              // When the voting round finishes, call this function again!
              $("#votingList").find("div.votingListWrapper").html(data).trigger('expand');
@@ -104,8 +107,6 @@ function updatePerc() {
 function attachVotes() {
     //voting
     $("div.songForVote").click(function() {
-        console.log("Got a click...");
-        console.log("Voting round is " + voting_round_id);
         $.post("/votes", { "vote[user_id]": 2, "vote[song_id]": $(this).attr("id").replace("song",""), "vote[voting_round_id]": voting_round_id });
         return false;
     })
@@ -119,7 +120,7 @@ $(function () {
     
     
     // Request to update numbers
-    updatePerc()
+   // updatePerc()
     
     //Countdown timer until song changes
     var totalTime = 10,
