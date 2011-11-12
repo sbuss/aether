@@ -33,7 +33,7 @@ Aether::Application.routes.draw do
 
   resources :users
 
-  root :to => "dashboards#index"
+  root :to => redirect("/dashboards/sample-dashboard")
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
