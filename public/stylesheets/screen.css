@@ -144,13 +144,15 @@ ul.tasks {
 }
 
 #timeLeft {
+    margin-top:5px;
     color:#fff;
     text-align:center;
 }
 
 #timeLeft h2 {
-    margin-top:20px;
-    font-size:5em;
+    color:#777;
+    margin-top:10px;
+    font-size:3em;
     text-shadow: #000 5px 5px 3px;
 }
 #timeLeft h2 span{
@@ -199,7 +201,7 @@ margin:0
 
 #lifeLine {
     position:absolute;
-    top:400px;
+    top:285px;
     bottom:0;
     left:0;
     right:0;
@@ -256,7 +258,6 @@ margin:0
   top: 0px;
   width: 250px;
   z-index: 5;
-  background: rgba(0,0,0,0.5);
 }
 
 #song_votes div.votingSong {

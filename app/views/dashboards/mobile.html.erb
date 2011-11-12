@@ -110,11 +110,15 @@ function updatePerc() {
     percTimer = setTimeout(updatePerc, 1000)
 }
 
+var vOpen = true;
 function attachVotes() {
     //voting
     $("div.songForVote").click(function() {
         $.mobile.showPageLoadingMsg();
-        $.post("/votes", { "vote[user_id]": 2, "vote[song_id]": $(this).attr("id").replace("song",""), "vote[voting_round_id]": voting_round_id });
+        if(vOpen) {
+            vOpen  =  false;
+            $.post("/votes", { "vote[user_id]": 2, "vote[song_id]": $(this).attr("id").replace("song",""), "vote[voting_round_id]": voting_round_id }, function() {vOpen = true;});
+        }
         return false;
     })
 }
