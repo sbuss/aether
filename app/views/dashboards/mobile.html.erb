@@ -78,7 +78,6 @@ function updatePerc() {
     //Grab current state of all songs
     $.get("/jukeboxes/" + jukebox_id + "/songsForVoting", 
         function(data) {
-            console.log(data);
             votes = data.votes;
             var totalVotes = 0;
             //Grab total votes
@@ -120,7 +119,7 @@ $(function () {
     
     
     // Request to update numbers
-   // updatePerc()
+    updatePerc()
     
     //Countdown timer until song changes
     var totalTime = 10,

@@ -10,6 +10,11 @@
       <%= javascript_include_tag "smiley", "jqm.min.js" %>
       <%= csrf_meta_tag %>
       <script type="text/javascript">
+          $.ajaxSetup({
+              beforeSend: function(xhr) {
+                  xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+              }
+          });
             function loadSmiley() {
                 var s = new SmileySlider(document.getElementById("slider"))
 

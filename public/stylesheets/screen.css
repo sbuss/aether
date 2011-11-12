@@ -34,11 +34,13 @@ ul.tasks {
     z-index:2;
     padding:50px;
     color:#fff;
+    width: 800px;
 }
 
 
 .jb .album_info {
     padding:20px 0 0 15px;
+    width: 500px;
 
 }
 .jb .now_playing {
@@ -46,19 +48,34 @@ ul.tasks {
     float:left;
 }
 .jb .pointer {
+    position:relative;
     float:left;
+    height:25px;
+    line-height:25px;
+    -webkit-border-radius: 10px 0 0 10px;
+    -moz-border-radius: 10px 0 0 10px;
+    border-radius: 10px 0 0 10px;   
+    padding:0 10px;
 }
 .jb .pointer.red {
-    background:#af0200;
+    background:transparent url("/images/red_arrow_bg.png") repeat-x left center;
 }
 .jb .pointer.gray {
     background:#2e302f;
+}
+.jb .point.red {
+    background:transparent url("/images/red_arrow_point.png") no-repeat left center;
+    height:25px;
+    width:14px;
+    position:absolute;
+    right:-14px;
+    top:0;
 }
 
 .jb .song_title {
     clear: left;
     font-size: 3em;
-    margin: 40px 0;
+    line-height: 1em;
 }
 .fbimage {
     background:transparent url("/images/fb_profile.png") no-repeat center center;

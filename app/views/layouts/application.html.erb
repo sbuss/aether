@@ -5,6 +5,13 @@
     <%= stylesheet_link_tag 'normalize.css', 'scaffold.css', 'screen.css' %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
+  <script type="text/css">
+  $.ajaxSetup({
+ beforeSend: function(xhr) {
+   xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+ }
+});
+  </script>
 </head>
 <body>
 <h1><span class="b2">VIBE</span><span class="b3">&</span><span class="b1">PULSE</span></h1>
