@@ -1,6 +1,8 @@
 class Smiley < ActiveRecord::Base
   validates_presence_of :user_id
-  validates_presence_of :value
+  validates :value, :presence => true,
+                    :numericality => { :greater_than_or_equal_to => 0,
+                                       :less_than_or_equal_to => 100 }
 
   def as_json(options) 
     {
