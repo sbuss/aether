@@ -36,18 +36,15 @@
 
 <script type="text/javascript">
 var voting_round_id;
-$(function() {
-    newVotingRound();
-    
-    // Request to update numbers
-    //updatePerc()
-})
+
+var jukebox_id = <%= @jukebox.id %>;
+
 function newVotingRound() {
-    $.post("/voting_rounds/newrand?jukebox_id=<%= @jukebox.id %>",
+    $.post("/voting_rounds/newrand?jukebox_id=" + jukebox_id,
         function(data) {
             voting_round_id = data["id"];
-            $.get("/songs/songsForVote",
-                {"voting_round_id":voting_round_id},
+
+            $.get("/jukeboxes/" + jukebox_id + "/songsForVoting",
                 function(data) {
                     // This is the list of songs for the current voting round.
                     // When the voting round finishes, call this function again!
@@ -59,6 +56,14 @@ function newVotingRound() {
         },
         "json"
     );
+}
+
+function updateNowPlaying() {
+    $.get("/jukeboxes/" + jukebox_id + "/playing",
+        function(data) {
+            console.log(data);
+        },
+        "json");
 }
 // Fuck namespacing
 function setSongPercent (songDOM, percent) {
@@ -72,7 +77,7 @@ function setSongPercent (songDOM, percent) {
 }
 function updatePerc() {
     //Grab current state of all songs
-    $.get("/songs/songsForVote?voting_round_id=" + voting_round_id, 
+    $.get("/jukeboxes/" + jukebox_id + "/songsForVoting", 
         function(data) {
             votes = data.votes;
             var totalVotes = 0;
@@ -112,6 +117,13 @@ $(function () {
     //Slide widets in
     
     $('#tlContainer').animate( {"top":0}, 2000, "easeOutElastic" );
+
+    newVotingRound();
+
+    updateNowPlaying();
+    
+    // Request to update numbers
+    updatePerc()
     
     
     

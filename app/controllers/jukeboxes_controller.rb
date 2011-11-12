@@ -4,9 +4,23 @@ class JukeboxesController < ApplicationController
     @song = Song.find(jukebox.now_playing)
 
     respond_to do |format|
-      format.html { render :partial => "songs/song", :locals => { :song => @song } }
+      format.html { render :partial => "songs/now_playing", :locals => { :song => @song } }
       format.xml  { render :xml => @song }
       format.json  { render :json => @song }
+    end
+  end
+
+  def songsForVote
+    jukebox = Jukebox.find(params[:id])
+    voting_round = VotingRound.where(:jukebox_id => jukebox.id).last
+    song_ids = [voting_round.song_id_1, voting_round.song_id_2, voting_round.song_id_3]
+    @songs = Song.where(:id => song_ids)
+    @votes = Vote.where(:voting_round_id => params[:voting_round_id])
+    respond_to do |format|
+      format.html { render :partial => "songs/songs_for_vote" }
+      format.json { render :json => { :songs => @songs, 
+                                      :votes => @votes, 
+                                      :voting_round_id => voting_round.id } }
     end
   end
 

@@ -11,17 +11,6 @@ class SongsController < ApplicationController
     end
   end
 
-  def songsForVote
-    voting_round = VotingRound.find(params[:voting_round_id])
-    song_ids = [voting_round.song_id_1, voting_round.song_id_2, voting_round.song_id_3]
-    @songs = Song.where(:id => song_ids)
-    @votes = Vote.where(:voting_round_id => params[:voting_round_id])
-    respond_to do |format|
-      format.html { render :partial => "songs/songs_for_vote" }
-      format.json { render :json => {:songs => @songs, :votes => @votes } }
-    end
-  end
-
   # GET /songs/1
   # GET /songs/1.xml
   def show
