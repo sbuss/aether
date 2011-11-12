@@ -13,8 +13,9 @@
     <li>QR code to launch site on phone</li>
 </ul>
 
-
-<%= render @jukebox %>
+<div id="jukebox">
+    <%= render @jukebox %>
+</div>
 <div id="tlContainer">
     <% 20.times do |t| %>
     <div class="tlItem <%= t%2 == 0 ? :left : :right %>">
@@ -36,11 +37,17 @@ var voting_round_id;
 
 var jukebox_id = <%= @jukebox.id %>;
 
+function newSong() {
+    $.get("/voting_rounds/"+voting_round_id+"/tally", function(d) {
+        newVotingRound();
+        updateNowPlaying();
+        countDownTimer();
+    })    
+}
+
 function newVotingRound() {
     $.post("/voting_rounds/newrand?jukebox_id=" + jukebox_id,
         function(data) {
-            console.log("made new voting round");
-            console.log(data);
             voting_round_id = data["id"];
 
             $.get("/jukeboxes/" + jukebox_id + "/songsForVoting",
@@ -48,7 +55,7 @@ function newVotingRound() {
                     // This is the list of songs for the current voting round.
                     // When the voting round finishes, call this function again!
                     $("#song_votes").html(data);
-                    attachVotes();
+                    
                 }
                 
             );
@@ -60,9 +67,8 @@ function newVotingRound() {
 function updateNowPlaying() {
     $.get("/jukeboxes/" + jukebox_id + "/playing",
         function(data) {
-            console.log(data);
-        },
-        "json");
+            $("#jukebox").find("div.content").html(data)
+        });
 }
 // Fuck namespacing
 function setSongPercent (songDOM, percent) {
@@ -76,11 +82,8 @@ function setSongPercent (songDOM, percent) {
 }
 function updatePerc() {
     //Grab current state of all songs
-    console.log("Updating percent");
-    console.log(jukebox_id);
     $.get("/jukeboxes/" + jukebox_id + "/songsForVoting", 
         function(data) {
-            console.log(data);
             votes = data.votes;
             var totalVotes = 0;
             //Grab total votes
@@ -108,48 +111,61 @@ function updatePerc() {
 function attachVotes() {
     //voting
     $("div.votingSong").click(function() {
-        console.log("Got a click...");
-        console.log("Voting round is " + voting_round_id);
         $.post("/votes", { "vote[user_id]": 2, "vote[song_id]": $(this).attr("id").replace("song",""), "vote[voting_round_id]": voting_round_id });
         return false;
     })
 }
 
+var timerTracker;
+//Countdown timer until song changes
+  function countDownTimer() {
+      var totalTime = 30,
+          endTime = new Date(),
+          $timer = $("#countdown");
+      endTime.setSeconds(endTime.getSeconds() + totalTime);
+      
+      if(timerTracker) {
+          clearTimeout(timerTracker);
+      }
+      
+      (function countDown() {          
+          var now = new Date(),
+              timeLeft = Math.floor((endTime-now)/1000),
+              formatted = timeLeft < 10 ? timeLeft < 0 ? "00": "0"+timeLeft : timeLeft;
+          $timer.html(formatted + "<br /><span>seconds</span>");
+          
+          if(endTime - now < 0) {
+              newSong();
+              return;
+          } 
+      
+          timerTracker = setTimeout(countDown, 100)
+      
+      })()   
+  }
+
 $(function () {
+    $("button.skipSong").button().click(function() {
+       newSong();
+    });    
+    
     //Slide widets in
     
     $('#tlContainer').animate( {"top":0}, 2000, "easeOutElastic" );
 
     newVotingRound();
-
+    attachVotes();
     updateNowPlaying();
     
+    countDownTimer();
     // Request to update numbers
     updatePerc()
     
+})    
+    
+  
     
     
-    //Countdown timer until song changes
-    var totalTime = 10,
-        endTime = new Date(),
-        $timer = $("#countdown");
-    endTime.setSeconds(endTime.getSeconds() + totalTime);
-        
-        
-    (function countDown() {
-        var now = new Date(),
-            timeLeft = Math.floor((endTime-now)/1000),
-            formatted = timeLeft < 10 ? timeLeft < 0 ? "00": "0"+timeLeft : timeLeft;
-        $timer.text("00:"+formatted);
-            
-        if(endTime - now < 0) {
-            return;
-        } else {
-            setTimeout(countDown, 100)
-        }
-    })()    
-    
-    
-})
+
 
 </script>

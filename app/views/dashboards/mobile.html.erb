@@ -32,7 +32,7 @@ $(function() {
     // Get the current song playing
     $.get("/jukeboxes/<%= @jukebox.id %>/playing",
         function(d) {
-            console.log(d)
+            $("#cp_title_artist").text(d.name + " by " + d.artist)
             $("#cp_dd_title").text(d.name);
             $("#cp_dd_artist").text(d.artist);
             $("#cp_art").attr("src",'/images/albums/'+d.album_art)

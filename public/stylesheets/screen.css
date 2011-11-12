@@ -28,6 +28,15 @@ ul.tasks {
     background:transparent url(/images/jb_bg.png) no-repeat center center;
     position:relative;    
 }
+.skipSong {
+    z-index:10;
+    margin:20px;
+    opacity:.5;
+}
+
+.skipSong:hover {
+    opacity:1;
+}
 
 .jb .content {
     position:relative;
@@ -40,7 +49,7 @@ ul.tasks {
 
 .jb .album_info {
     padding:20px 0 0 15px;
-    width: 500px;
+    width: 550px;
 
 }
 .jb .now_playing {
@@ -135,7 +144,9 @@ ul.tasks {
     font-size:5em;
     text-shadow: #000 5px 5px 3px;
 }
-
+#timeLeft h2 span{
+ font-size:12px;   
+}
 
 /* /JukeBox */
 

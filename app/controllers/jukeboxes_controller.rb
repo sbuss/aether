@@ -5,9 +5,9 @@ class JukeboxesController < ApplicationController
 
     respond_to do |format|
        if (@browser == "mobile") 
-          format.html { render :partial => "songs/now_playing_mobile"}
+          format.html { render :partial => "songs/now_playing_mobile", :locals => { :song => @song }}
         else 
-          format.html { render :partial => "songs/now_playing" }
+          format.html { render :partial => "songs/now_playing", :locals => { :song => @song }}
         end
       #  s = render_to_string :partial => "songs/now_playing_mobile", :type => "html", :locals => { :song => @song } 
       format.xml  { render :xml => @song }

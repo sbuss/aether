@@ -108,7 +108,7 @@ function SmileySlider(container, imgSrc) {
         document.onmouseup = function (e) {
             document.onmousemove = oldMove
             document.onmouseup = oldUp
-            $(smiley).trigger("MOVED", position());
+            $(smiley).trigger("update", position());
         }
     }
 
@@ -140,6 +140,7 @@ function SmileySlider(container, imgSrc) {
             document.ontouchmove = oldMove
             document.ontouchend = oldEnd
             document.ontouchcancel = oldCancel;
+             $(smiley).trigger("update", position());
         }
     }
 

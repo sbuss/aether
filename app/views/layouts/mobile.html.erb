@@ -28,15 +28,12 @@
                 s.position(function (p) {})
                 
                 
-                $(s).bind("MOVED", function(e,d) {
+                $(s).bind("update", function(e,d) {
                     $.post("/smileys", 
                         {"smiley[value]":(d*100)}
                     )
                 })
-                    // do something when it changes
-                    // $.post("/smileys", 
-                    //                         {"smiley[value]":(p*100)});
-                    //                     })
+
             }
         </script>
 </head> 
