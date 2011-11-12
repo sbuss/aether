@@ -67,7 +67,7 @@ function newVotingRound() {
 function updateNowPlaying() {
     $.get("/jukeboxes/" + jukebox_id + "/playing",
         function(data) {
-            $("#jukebox").find("div.content").html(data)
+            $("#jukebox").find("div.content_inner").html(data)
         });
 }
 // Fuck namespacing
