@@ -41,9 +41,12 @@ ul.tasks {
 .jb .content {
     position:relative;
     z-index:2;
-    padding:50px;
+    margin-top:30px;
+    margin-bottom:50px;
     color:#fff;
-    width: 800px;
+    width: 100%;
+    float: left;
+    background: rgba(0,0,0,0.5);
 }
 
 
@@ -110,6 +113,7 @@ ul.tasks {
 .album_art{
     width:201px;
     height:204px;
+    margin: 20px;
     float:left;
 }
 

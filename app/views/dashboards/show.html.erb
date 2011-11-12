@@ -1,7 +1,7 @@
 
 <div id="lifeLine"><div class="llTop"></div><div class="llLine"></div></div>
 
-<ul class="tasks">
+<!--<ul class="tasks">
     <% if signed_in? %>
       <li>User logged in as <%= current_user.name %></li>
     <% else %>
@@ -11,22 +11,13 @@
     <li>Drag and drop widgets</li>
     <li>Mobile site</li>
     <li>QR code to launch site on phone</li>
-</ul>
+</ul>-->
 
 <div id="jukebox">
     <%= render @jukebox %>
 </div>
 <div id="tlContainer">
-    <% 20.times do |t| %>
-    <div class="tlItem <%= t%2 == 0 ? :left : :right %>">
-        <div class="tlHeader"><div class="fbimage"></div><span class="people"><h4>3 People</h4><span class="timeago">One hour ago<span></span></div>
-        <h3 class="action">Suggest listening to</h3>
-        <div class="album">
-            <span class="artist">Apple Blossom</span>
-            <span class="song">by Esperanza Spalding</span>
-        </div>
-    </div>    
-    <% end %>
+    <%= render @voting_rounds %>
 </div>
 
 
@@ -66,7 +57,7 @@ function newVotingRound() {
 function updateNowPlaying() {
     $.get("/jukeboxes/" + jukebox_id + "/playing",
         function(data) {
-            $("#jukebox").find("div.content").html(data)
+            $("#jukebox").find("div.content_inner").html(data)
         });
         
     
