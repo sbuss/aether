@@ -1,27 +1,15 @@
 <div data-role="collapsible" data-theme="a"  data-content-theme="b">
-   <h3>Currently playing - Lady Gaga. Just Dance</h3>
+   <h3>Currently playing -<span id="cp_title"></span> by <span id="cp_artist"></span></h3>
    <div class="ui-grid-a votingList" style="clear:left">
-   	<div class="ui-block-a albumArt"><img src="/images/albums/jagger.jpg" /></div>
-   	<div class="ui-block-b"><span>Shity Song</span><span>Shity Artist</span></div>
+   	<div class="ui-block-a albumArt"><img id="cp_art" src="" /></div>
+   	<div class="ui-block-b"><span id="cp_dd_title"></span><br /><span id="cp_dd_artist"></span></div>
    </div>
 </div>
 
-<div data-role="collapsible" data-theme="b"  data-content-theme="b" data-collapsed="false" >
+<div data-role="collapsible" data-theme="b"  data-content-theme="b" id="votingList">
    <h3>Vote for the next song</h3>
     <div class="ui-body votingList">
-        <div class="ui-grid-a votingList" style="clear:left">
-        	<div class="ui-body ui-body-c songForVote">
-        	    <div class="ui-block-a albumArt"><img src="/images/albums/jagger.jpg" /></div>
-        	    <div class="ui-block-b"><span>Shity Song</span><span>Shity Artist</span></div>
-        	</div>
-        	<div class="ui-body ui-body-c songForVote">
-        	    <div class="ui-block-a albumArt"><img src="/images/albums/jagger.jpg" /></div>
-        	    <div class="ui-block-b"><span>Shity Song</span><span>Shity Artist</span></div>
-        	</div>
-        	<div class="ui-body ui-body-c songForVote">
-        	    <div class="ui-block-a albumArt"><img src="/images/albums/jagger.jpg" /></div>
-        	    <div class="ui-block-b"><span>Shity Song</span><span>Shity Artist</span></div>
-        	</div>
+        <div class="ui-grid-a votingListWrapper" style="clear:left">
         </div>
     </div>
 </div>
@@ -31,24 +19,45 @@
 -->
 
 <script type="text/javascript">
-var voting_round;
-
+var voting_round_id;
+var jukebox_id = <%= @jukebox.id %>;
 $(function() {
-    
     $.get("/voting_rounds/current",
-        {"jukebox_id":1},
+        {"jukebox_id":jukebox_id},
         function(data) {
-            console.log(data);
+            voting_round_id = data.id;
         }
     );
+    $.mobile.showPageLoadingMsg();
+    // Get the current song playing
+    $.get("/jukeboxes/<%= @jukebox.id %>/playing",
+        function(d) {
+            $("#cp_title, #cp_dd_title").text(d.name);
+            $("#cp_artist, #cp_dd_artist").text(d.artist);
+            $("#cp_art").attr("src",'/images/albums/'+d.album_art)
+        },
+        "json"    
+    )
+    
+    // Get the songs up for vote
+    $.get("/jukeboxes/<%= @jukebox.id %>/songsForVoting",
+         function(data) {
+             console.log(data);
+             // This is the list of songs for the current voting round.
+             // When the voting round finishes, call this function again!
+             $("#votingList").find("div.votingListWrapper").html(data).trigger('expand');
+             $.mobile.hidePageLoadingMsg();
+             attachVotes();
+         }
+         
+     );
+    
+    
     
     $("header div.headWrap").click(function() {
         $("#slider").slideToggle("slow");
     })
-    
 
-    
-    
 })
 
 
@@ -64,18 +73,27 @@ function setSongPercent (songDOM, percent) {
 
 function updatePerc() {
     //Grab current state of all songs
-    $.get("/songs/songsForVote?voting_round_id=" + voting_round, 
+    $.get("/jukeboxes/" + jukebox_id + "/songsForVoting", 
         function(data) {
+            console.log(data);
+            votes = data.votes;
             var totalVotes = 0;
             //Grab total votes
-            for(var i=0,l=data.length;i<l;i++) {
-                totalVotes += data[i].votes.length
+            totalVotes = votes.length;
+            votes_per_song = {};
+            for(var i=0;i<totalVotes;i++) {
+                var song_id = votes[i].vote.song_id
+                if(votes_per_song[song_id]) {
+                    votes_per_song[song_id] += 1;
+                } else {
+                    votes_per_song[song_id] = 1;
+                }
             }
 
             // update Songs 
-            for(var i=0;i<l;i++) {
-                var perc = (data[i].votes.length/totalVotes)*100;
-                setSongPercent($("#song"+data[i].id).eq(0), perc);
+            for (var key in votes_per_song) {
+                var perc = (votes_per_song[key]/totalVotes)*100;
+                setSongPercent($("#song"+key).eq(0), perc);
             }
 
         }, 
@@ -85,7 +103,7 @@ function updatePerc() {
 
 function attachVotes() {
     //voting
-    $("div.votingSong").click(function() {
+    $("div.songForVote").click(function() {
         console.log("Got a click...");
         console.log("Voting round is " + voting_round_id);
         $.post("/votes", { "vote[user_id]": 2, "vote[song_id]": $(this).attr("id").replace("song",""), "vote[voting_round_id]": voting_round_id });
@@ -101,7 +119,7 @@ $(function () {
     
     
     // Request to update numbers
-   // updatePerc()
+    updatePerc()
     
     //Countdown timer until song changes
     var totalTime = 10,

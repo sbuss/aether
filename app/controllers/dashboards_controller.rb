@@ -39,7 +39,6 @@ class DashboardsController < ApplicationController
 #    @songs = Song.all
     @jukebox = Jukebox.where(:dashboard_id => @dashboard)[0]
     @songs = Song.where(:jukebox_id => @jukebox)
-
     render :mobile if @browser == "mobile"
     # respond_to do |format|
     #   format.html # show.html.erb
