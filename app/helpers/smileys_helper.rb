@@ -1,0 +1,2 @@
+module SmileysHelper
+end

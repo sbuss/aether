@@ -5,19 +5,39 @@ module SessionsHelper
     rescue
       u = User.create(:name => name, :facebook_id => fb_id)
     end
-    session[:current_user] = u.id
-    #session[:remember_token] = [user.id, user.salt]
-    self.current_user = u
+    set_current_user(u)
   end
 
-  def current_user=(user)
+  def auto_user
+    if current_user.nil?
+      lu = User.last
+      if lu.nil?
+        id = 1
+      else
+        id = lu.id + 1
+      end
+      u = User.create!(:name => "random user ##{id}")
+      set_current_user(u)
+    end
+  end
+
+  def set_current_user(user)
+    session[:current_user] = user.id
     @current_user = user
   end
 
   def current_user
-    logger.info "Current user is #{@current_user}"
+    if @current_user.nil?
+      logger.info "Current user is nil"
+    else
+      logger.info "Current user is #{@current_user.name}"
+    end
     @current_user ||= user_from_session
-    logger.info "Current user is now #{@current_user}"
+    if @current_user.nil?
+      logger.info "Current user is nil"
+    else
+      logger.info "Current user is #{@current_user.name}"
+    end
     @current_user
   end
 
@@ -39,8 +59,9 @@ module SessionsHelper
     def user_from_session
       # this * is for multiple element params, is sum(1,2) = sum(*[1,2])
       logger.info("Getting from session")
+      logger.info("session user id is #{session[:current_user]}")
       begin
-        u = User.where(:id => session[:current_user])[0]
+        u = User.find(session[:current_user])
       rescue
         u = nil
       end

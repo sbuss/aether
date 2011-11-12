@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :detect_browser
+  before_filter :auto_user # from SessionsHelper
   include SessionsHelper
   
   layout :detect_browser
