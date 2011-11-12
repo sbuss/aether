@@ -1,3 +1,41 @@
+/*  jQuery Mobile Overrides */
+.ui-body {
+    overflow:visible;
+}
+.ui-body.votingList{
+margin-top:-10;
+}
+
+.ui-bar-a {
+    border: 1px solid #2A2A2A;
+    background: #ff6500;
+    color: white;
+    font-weight: bold;
+    text-shadow: 0 -1px 1px black;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#ff6500),to(#da5702));
+    background-image: -webkit-linear-gradient(top,#ff6500,#da5702);
+    background-image: -moz-linear-gradient(top,#ff6500,#da5702);
+    background-image: -ms-linear-gradient(top,#ff6500,#da5702);
+    background-image: -o-linear-gradient(top,#ff6500,#da5702);
+    background-image: linear-gradient(top,#ff6500,#da5702);
+}
+
+.ui-grid-a .ui-block-a {
+    width:auto;
+}
+
+/* /jquery overrides */
+
+.albumArt img{
+    width:100px;
+    height:100px;
+}
+
+.songForVote {
+    float:left;
+    width:100%;
+}
+
 body {
     background:#ccc url('/images/stripped_back.png') repeat left top;
 }
@@ -16,9 +54,8 @@ h1.musicList {
 }
 
 #slider {
-    display:none;
-    width:750px;
-    margin:50px auto;
+    width:250px;
+    margin:5px auto;
 }
 /* JukeBox */
 .jb {
@@ -48,7 +85,7 @@ h1.musicList {
     color:#FFF;
     float:left;
 }
-.jb .pointer {
+.pointer {
     position:relative;
     float:left;
     height:25px;
@@ -57,12 +94,14 @@ h1.musicList {
     -moz-border-radius: 10px 0 0 10px;
     border-radius: 10px 0 0 10px;   
     padding:0 10px;
-    top:-10px;
+    top:-20px;
 }
-.jb .pointer.red {
+.pointer.red {
+    color:#fff;
+    text-shadow: 0 1px 0 #000;
     background:transparent url("/images/red_arrow_bg.png") repeat-x left center;
 }
-.jb .point.red {
+.point.red {
     background:transparent url("/images/red_arrow_point.png") no-repeat left center;
     height:25px;
     width:14px;
