@@ -1,3 +1,12 @@
+This was an idea for location-aware interactive APIs that didn't get off the ground.
+
+It was hacked together quickly with the intention of showing a demo at a YC interview.
+
+We did not get accepted.
+
+This is just here because it was taking up a private repo slot, and there's no sense paying
+to keep this private.
+
 Getting your environment running
 ================================
 
